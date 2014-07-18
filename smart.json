@@ -1,0 +1,19 @@
+{
+  "packages": {
+    "bootstrap3-less": {},
+    "npm": {},
+    "i18n": {},
+    "stellar": {},
+    "iron-router": {},
+    "roles": {},
+    "event-hooks": {},
+    "moment": {},
+    "accounts-vk": {},
+    "select2": {},
+    "headers": {},
+    "pnotify": {},
+    "jquery-imagesloaded": {},
+    "jqueryui": {},
+    "iron-router-progress": {}
+  }
+}

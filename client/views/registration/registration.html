@@ -1,5 +1,7 @@
 <template name="registration">
 
+    <div id="main-loader"></div>
+
     <section class="registration wrap">
 
         <header>
@@ -10,19 +12,19 @@
                     <div>2</div>
                     <div>3</div>
                 </div>
-                <div class="user">{{currentUser.profile.firstName}}</div>
+                <div class="logout"><a><i class="fa fa-chevron-circle-left"></i> выйти</a></div>
             </div>
         </header>
 
         <footer>
             <div class="container">
-                <p><strong>2014</strong> m i c r o c o s m. All rights reversed!</p>
+                <p><span>2014</span> m i c r o c o s m. All rights reversed!</p>
             </div>
         </footer>
 
         <section id="info-block" class="info">
 
-            <div class="background" style="background-image: url({{cloudfrontUrl}}images/info_bg.jpg);"></div>
+            <div class="background" style="background-image: url(http://d1jfn2lab933y3.cloudfront.net/images/info_bg.jpg);"></div>
 
             <div id="info-insert" class="insertion container"></div>
 
@@ -30,20 +32,101 @@
 
         <section class="testing">
 
-            <div class="background  _visible" style="background-image: url({{cloudfrontUrl}}images/testing_bg.jpg);"></div>
+            <div class="wrap">
 
-            <div id="testing-insert" class="insertion container"></div>
+                <div class="background  _visible"
+                     style="background-image: url(http://d1jfn2lab933y3.cloudfront.net/images/test_part_1.jpg);"></div>
 
-            <div class="break-one">
+                <div id="testing-insert" class="insertion container"></div>
 
-                <div class="circle">
-                    <span>Кстати!</span>
-                    Кстати, вы знаете, что 70%
-                    наления земного шара никогда в жизни не
-                    пользовались услугами психолога. Короче
-                    разбавлять интересными фактами
-                    не больше размера этого
-                    сообщения
+                <div class="break-one breaks">
+
+                    <div class="container">
+
+                        <h3>НЕБОЛЬШОЙ ПЕРЕРЫВ!</h3>
+                        <h4>Все идет хорошо, но важно немного отвлечься:)</h4>
+
+                        <div class="circle">
+                            <p>Тест, которыи вы сейчас<br/>
+                                проходите, называется Big Five,<br/>
+                                и является одним из самых уважаемых<br/>
+                                личностных тестов в современной<br/>
+                                психологии. Суть в выявлении доминантных<br/>
+                                личностных качеств, и на основе этого<br/>
+                                выстраивании целостнои картины личности,<br/>
+                                Постараитесь быть максимально<br/>
+                                откровенными при заполнении,<br/>
+                                отвечать на вопросы не как вам<br/>
+                                хочется чтобы было, а как есть на <br/>
+                                самом деле. Тут важно быть<br/>
+                                откровенным с самим собой. Обещаем,<br/>
+                                результаты вас удивят своей<br/>
+                                объективностью</p>
+                        </div>
+
+                        <button class="further">ПРОДОЛЖАЕМ</button>
+
+                    </div>
+
+                </div>
+
+                <div class="break-two breaks">
+
+                    <div class="container">
+
+                        <h3>ОТЛИЧНО!</h3>
+                        <h4>Осталось совсем немного!</h4>
+
+                        <div class="circle huge">
+                            <p>Немного о<br/>
+                                том, как работает<br/>
+                                наша система. Основная<br/>
+                                суть в том, что<br/>
+                                мы берем различные<br/>
+                                психологические и не только методики, и результаты<br/>
+                                их сводим к общему ядру. То есть<br/>
+                                чем больше разных тестов вы пройдете,<br/>
+                                тем больше будет точность вашей<br/>
+                                личностной характеристики</p></div>
+                        <div class="circle small"><p>Далее, на основе<br/>
+                            этих данных, а также ваших<br/>
+                            интересов, убеждений и т.д. мы<br/>
+                            моделируем на основе современных<br/>
+                            методик ваши отношения с<br/>
+                            другими участниками</p></div>
+                        <button class="further">ЕДЕМ ДАЛЬШЕ!</button>
+                    </div>
+
+                </div>
+
+                <div class="finish breaks">
+
+                    <div class="container">
+
+                        <h3>СУПЕР!!</h3>
+                        <h4>Тест закончен, поздравляем!</h4>
+
+                        <div class="circle">
+                            <p>
+                                И так, мы уже<br/>
+                                построили основную модель<br/>
+                                вашей личности, и вы уже<br/>
+                                стали полноправным членом<br/>
+                                нашего сообщества. Но прежде,<br/>
+                                чем вы перейдете к своему профилю,<br/>
+                                мы очень просим вас пройти еще одну вещь.<br/>
+                                Это называется ОКНО ДЖОХАРИ,<br/>
+                                и займет у вас не больше<br/>
+                                минуты, обещаем! Кстати, <br/>
+                                наши участники находят этот<br/>
+                                тест чуть ли не<br/>
+                                самым интересным;)
+                            </p>
+                        </div>
+                        <button><i class="fa fa-chevron-down"></i><br/>НАЧНЕМ</button>
+
+                    </div>
+
                 </div>
 
             </div>

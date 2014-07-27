@@ -1,7 +1,8 @@
-if Meteor.users.find().count() > 0
-  Meteor.users.find().fetch().forEach (user)->
-    id = user._id
-    Meteor.users.remove id
+#if Meteor.users.find().count() > 0
+#  Meteor.users.find().fetch().forEach (user)->
+#    id = user._id
+#    Meteor.users.remove id
+
 
 #  user = Accounts.createUser {
 #    username: 'albertkai'

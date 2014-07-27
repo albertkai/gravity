@@ -6,6 +6,8 @@
 @gray-light: #999;
 @red: #ff7b7b;
 @blue: #00c0ff;
+@blue-light: #b6eeff;
+@green: #3cff00;
 
 * {
   outline: none;
@@ -17,7 +19,9 @@ html, body{
   height: 100%;
 }
 
-
+a{
+  cursor: pointer;
+}
 input{
   padding: 6px 20px;
   font-size: 22px;
@@ -73,6 +77,31 @@ label.error{
   visibility: hidden;
 }
 
+#main-loader {
+  position: fixed;
+  visibility: hidden;
+  .scale(0);
+  opacity: 0;
+  -webkit-transition: all .5s cubic-bezier(0.650, -0.600, 0.415, 1.650);
+  -moz-transition: all .5s cubic-bezier(0.650, -0.600, 0.415, 1.650);
+  -ms-transition: all .5s cubic-bezier(0.650, -0.600, 0.415, 1.650);
+  -o-transition: all .5s cubic-bezier(0.650, -0.600, 0.415, 1.650);
+  transition: all .5s cubic-bezier(0.650, -0.600, 0.415, 1.650);
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 20px;
+  border-radius: 50px;
+  border: 2px solid white;
+  left: 50%;
+  top: 50%;
+  margin-left: -45px;
+  margin-top: -45px;
+  &._visible {
+    visibility: visible;
+    opacity: 1;
+    .scale(1);
+  }
+}
 
 
 //Utils

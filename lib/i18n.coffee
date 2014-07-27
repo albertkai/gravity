@@ -246,22 +246,22 @@ Meteor.i18nMessages.registration = {
     '75':
       en: 'I love when others reveal my orders'
       ru: 'Иногда я чувствую, что могу открыть в себе нечто новое'
-    grades:
-      'low':
-        en: 'Its not about me, definetely'
-        ru: 'Нет, это точно не про меня!'
-      'semilow':
-        en: 'Well maybe, but not!'
-        ru: 'Скорее нет, чем да!'
-      'mid':
-        en: 'For time to time!'
-        ru: 'Иногда да, иногда нет, периодами!'
-      'semihigh':
-        en: 'Mostly yes, but sometimes not!'
-        ru: 'Скорее да, чем нет!'
-      'high':
-        en: 'Yeah, thats about me, 100%!'
-        ru: 'Да, это про меня!'
+  grades:
+    'low':
+      en: 'Its not about me, definetely'
+      ru: 'Нет, это точно не про меня!'
+    'semilow':
+      en: 'Well maybe, but not!'
+      ru: 'Скорее нет, чем да!'
+    'mid':
+      en: 'For time to time!'
+      ru: 'Иногда да, иногда нет, периодами!'
+    'semihigh':
+      en: 'Mostly yes, but sometimes not!'
+      ru: 'Скорее да, чем нет!'
+    'high':
+      en: 'Yeah, thats about me, 100%!'
+      ru: 'Да, это про меня!'
 
 
 

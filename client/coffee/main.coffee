@@ -1,3 +1,5 @@
+Session.set('usersLoaded', false)
+
 @log = (el)->
   console.log(el)
 
@@ -12,9 +14,11 @@ Meteor.setLocale('ru')
 
 Session.set 'mapLoaded', false
 
-#Deps.autorun ->
-#  if Meteor.user()
-#    Router.go 'base'
+Deps.autorun ->
+  if Meteor.user() and !Session.get('usersLoaded')
+    log 'deps worked!'
+    Session.set('usersLoaded', true)
+    Router.go 'base'
 
 
 Accounts.ui.config {
@@ -23,6 +27,18 @@ Accounts.ui.config {
   }
 }
 
+
+
+#Init loader
+Template.mainLayout.rendered = ->
+  MainCtrl['loader'] = new CanvasLoader('main-loader')
+  MainCtrl['loader'].setColor('#ffffff')
+  MainCtrl['loader'].setDiameter(56)
+  MainCtrl['loader'].setDensity(66)
+  MainCtrl['loader'].setRange(1)
+  MainCtrl['loader'].setFPS(51)
+  console.log 'thid is main ctrl'
+  console.log MainCtrl
 
 
 UI.body.events {

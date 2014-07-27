@@ -12,6 +12,8 @@
 
 <template name="mainLayout">
 
+    <div id="main-loader"></div>
+
     <div id="perspective" class="perspective effect-moveleft">
         <div class="main-wrap">
             <div class="wrapper">
@@ -29,6 +31,11 @@
         </nav>
     </div>
 
+</template>
+
+
+<template name="registrationLayout">
+    {{>yield}}
 </template>
 
 

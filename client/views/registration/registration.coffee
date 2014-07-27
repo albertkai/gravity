@@ -7,16 +7,59 @@ Session.set('regInitialized', false)
 Session.set('testingClicked', false)
 
 Template.registration.rendered = ->
-
+  log 'reg template rendered'
+  MainCtrl['loader'] = new CanvasLoader('main-loader')
+  MainCtrl['loader'].setColor('#ffffff')
+  MainCtrl['loader'].setDiameter(56)
+  MainCtrl['loader'].setDensity(66)
+  MainCtrl['loader'].setRange(1)
+  MainCtrl['loader'].setFPS(51)
+  log 'registration/hello, found user'
   status = Meteor.user().profile.registration.status
   if status is "justRegistered"
+    log 'router is rendering info template from action'
     UI.insert UI.render(Template.info), $('#info-insert').get(0)
   else if status is "testing"
+    log 'router is rendering testing template from action'
     $('.reg-step').find('>div').removeClass '_active'
     $('.reg-step').find('>div').eq(1).addClass '_active'
     marginTop = 0 - $(window).height()
+    $('.registration').find('.info').addClass 'notransition'
     $('.registration').find('.info').css('margin-top', marginTop + 'px')
+    setTimeout ->
+      $('.registration').find('.info').removeClass 'notransition'
+    , 200
     UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
+  $(window).resize ->
+    $('.registration').find('.info').addClass 'notransition'
+    index = $('.reg-step').find('>div._active').index()
+    $('.registration').find('.info').css('margin-top', $(window).height() * index * -1 + 'px')
+    _.debounce ->
+      $('.registration').find('.info').removeClass 'notransition'
+    , 100
+#  status = Meteor.user().profile.registration.status
+#  if status is "justRegistered"
+#    UI.insert UI.render(Template.info), $('#info-insert').get(0)
+#  else if status is "testing"
+#    $('.reg-step').find('>div').removeClass '_active'
+#    $('.reg-step').find('>div').eq(1).addClass '_active'
+#    marginTop = 0 - $(window).height()
+#    $('.registration').find('.info').css('margin-top', marginTop + 'px')
+#    UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
+
+Template.registration.events {
+  'click .breaks .further': ->
+    regCtrl.breakDone()
+
+  'click .logout a': (e)->
+    e.preventDefault()
+    Meteor.logout ->
+      Session.set('usersLoaded', false)
+      new PNotify {
+        title: 'До встречи!'
+        text: 'Ждем вас снова!:)'
+      }
+}
 
 
 
@@ -53,21 +96,14 @@ Template.testing_cont.rendered = ->
 
     regCtrl.flipSlidesInit()
     regStep = Meteor.user().profile.registration.step
+
     if regStep is 0
       $('#tests-container').find('.recto').find('.flip-cont').empty()
       UI.insert UI.render(Template.beforeHook), $('#tests-container').find('.recto').find('.flip-cont').get(0)
       Meteor.setTimeout ->
         $('#tests-container').addClass '_ready'
       , 600
-    else if regStep is 25 and Meteor.user().profile.registration.breakOne
-      $('#tests-container').find('.recto').find('.flip-cont').empty()
-      UI.insert UI.render(Template.breakOne), $('#tests-container').find('.recto').find('.flip-cont').get(0)
-    else if regStep is 50 and Meteor.user().profile.registration.breakTwo
-      $('#tests-container').find('.recto').find('.flip-cont').empty()
-      UI.insert UI.render(Template.breakTwo), $('#tests-container').find('.recto').find('.flip-cont').get(0)
-    else if regStep > 75
-      $('#tests-container').find('.recto').find('.flip-cont').empty()
-      UI.insert UI.render(Template.testFinish), $('#tests-container').find('.recto').find('.flip-cont').get(0)
+
     else
       $('#tests-container').find('.verso').find('.slide').empty()
       step = Meteor.user().profile.registration.step
@@ -75,104 +111,27 @@ Template.testing_cont.rendered = ->
           id: step
           size: _.keys(Meteor.i18nMessages.registration.questions).length
           question: __('registration.questions.' + step)
-          low: __('registration.questions.grades.low')
-          semilow: __('registration.questions.grades.semilow')
-          mid: __('registration.questions.grades.mid')
-          semihigh: __('registration.questions.grades.semihigh')
-          high: __('registration.questions.grades.high')
+          low: __('registration.grades.low')
+          semilow: __('registration.grades.semilow')
+          mid: __('registration.grades.mid')
+          semihigh: __('registration.grades.semihigh')
+          high: __('registration.grades.high')
         }
       UI.insert UI.renderWithData(Template.testing, testData), $('#tests-container').find('.verso').find('.slide').first().get(0)
       $('#tests-container').addClass 'flip'
+#      $('#tests-container').removeClass 'flip'
+#      Meteor.setTimeout ->
+#        regCtrl.changeBackground $('.testing'), 'images/test_break_two.jpg', ->
+#          regCtrl.showBreakSecond()
+#      , 500
 
 
 
 Template.testing.events {
   'click #test-back': ->
-    if Session.get('testingClicked') is false
-      Session.set('testingClicked', true)
-      id = Meteor.user().profile.registration.step
-      userId = Meteor.user()._id
-      answer = {}
-      answer['profile.tests.bigFive.answers.' + id] = $('.range-slider').slider('value')
-      Meteor.users.update userId, {$set: answer}
-      if id > 1
-        Meteor.users.update userId, {$set: {'profile.registration.step': id - 1}}
-        step = Meteor.user().profile.registration.step
-        testData =  {
-          id: step
-          size: _.keys(Meteor.i18nMessages.registration.questions).length
-          question: __('registration.questions.' + step)
-          low: __('registration.questions.grades.low')
-          semilow: __('registration.questions.grades.semilow')
-          mid: __('registration.questions.grades.mid')
-          semihigh: __('registration.questions.grades.semihigh')
-          high: __('registration.questions.grades.high')
-        }
-        UI.insert UI.renderWithData(Template.testing, testData), $('#tests-container').find('.verso').find('.slide').get(1)
-
-        regCtrl.flipSlideChange($('#tests-container'))
-        Meteor.setTimeout ->
-          Session.set('testingClicked', false)
-        , 1000
+    regCtrl.testBack()
   'click #test-further': ->
-    Session.set('regInitialized', true)
-    if Session.get('regInitialized')
-      if Session.get('testingClicked') is false
-        Session.set('testingClicked', true)
-        id = Meteor.user().profile.registration.step
-        userId = Meteor.user()._id
-        answer = {}
-        answer['profile.tests.bigFive.answers.' + id] = $('.range-slider').slider('value')
-        console.log $('.range-slider').slider('value')
-        Meteor.users.update userId, {$set: answer}
-        if id < _.keys(Meteor.i18nMessages.registration.questions).length
-          regStep = Meteor.user().profile.registration.step
-          log 'trying'
-          Meteor.users.update userId, {$set: {'profile.registration.step': id + 1}}
-#          if Meteor.user().profile.tests.bigFive.answers[id + 1]
-#            console.log 'if'
-#            $('.range-slider').slider 'value', Meteor.user().profile.tests.bigFive.answers[id + 1]
-#          else
-#            console.log 'else'
-#            $('.range-slider').slider 'value', 50
-          if regStep is 0
-            UI.insert UI.render(Template.beforeHook), $('#tests-container').find('.recto').find('.flip-cont').get(0)
-            Meteor.setTimeout ->
-              $('#tests-container').addClass '_ready'
-            , 600
-          else if regStep is 25 and Meteor.user().profile.registration.breakOne
-
-            $('#tests-container').removeClass '_ready'
-            $('.break-one').addClass '_visible'
-          else if regStep is 50 and Meteor.user().profile.registration.breakTwo
-            $('#tests-container').find('.recto').find('.flip-cont').empty()
-            UI.insert UI.render(Template.breakTwo), $('#tests-container').find('.recto').find('.flip-cont').get(0)
-            $('#tests-container').removeClass '_flip'
-          else if regStep > 75
-            $('#tests-container').find('.recto').find('.flip-cont').empty()
-            UI.insert UI.render(Template.testFinish), $('#tests-container').find('.recto').find('.flip-cont').get(0)
-            $('#tests-container').removeClass '_flip'
-          else
-            step = Meteor.user().profile.registration.step
-            testData =  {
-              id: step
-              size: _.keys(Meteor.i18nMessages.registration.questions).length
-              question: __('registration.questions.' + step)
-              low: __('registration.questions.grades.low')
-              semilow: __('registration.questions.grades.semilow')
-              mid: __('registration.questions.grades.mid')
-              semihigh: __('registration.questions.grades.semihigh')
-              high: __('registration.questions.grades.high')
-            }
-            UI.insert UI.renderWithData(Template.testing, testData), $('#tests-container').find('.verso').find('.slide').get(1)
-            regCtrl.flipSlideChange($('#tests-container'))
-            Meteor.setTimeout ->
-              Session.set('testingClicked', false)
-            , 1000
-
-        else
-          bigFive.calc()
-          Router.go 'registration/finish'
+    regCtrl.testFurther(true)
 }
 
 
@@ -285,6 +244,7 @@ Template.info.events {
     name = $(e.currentTarget).closest('li').text()
     level = $(e.currentTarget).data('level')
     $('.add-lang').before '<div class="tag ' + level + '" data-level="' + level + '" data-value="' + value + '"><p>' + name + '</p><div class="remove"><i class="fa fa-times"></i></div></div>'
+    $('.add-lang').find('ul').removeClass '_hover'
 
   'click .lang-cont .remove': (e)->
     $(e.currentTarget).closest('.tag').remove()
@@ -302,8 +262,17 @@ Template.beforeHook.events {
     $(e.currentTarget).closest('div').find('*').removeClass '_visible'
     Meteor.setTimeout ->
       $(e.currentTarget).closest('div').empty()
-      Router.go 'registration/hello'
       $('#tests-container').addClass 'flip'
+      log 'router is rendering testing template from action'
+      $('.reg-step').find('>div').removeClass '_active'
+      $('.reg-step').find('>div').eq(1).addClass '_active'
+      marginTop = 0 - $(window).height()
+      $('.registration').find('.info').addClass 'notransition'
+      $('.registration').find('.info').css('margin-top', marginTop + 'px')
+      setTimeout ->
+        $('.registration').find('.info').removeClass 'notransition'
+      , 200
+      UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
     , 800
 
 
@@ -327,33 +296,34 @@ Template.breakTwo.events = {
 
 Template.testing.rendered = ->
 
-  console.log Meteor.user().profile.registration.step
-  log Meteor.user().profile.tests.bigFive.answers[Meteor.user().profile.registration.step]
 
+  $slider = $(@.find('.range-slider'))
   $(@.find('.range-slider')).slider({
 
     max: 100
 
     change: (e, ui)->
-      text = regCtrl.getTextGradeAndColor(ui.value)
-      $('.grade').find('ul li').removeClass('_active')
-      $('.grade').find('.' + text).addClass('_active')
+      text = regCtrl.getTextGradeAndColor(ui.handle, ui.value)
+      $slider.siblings('.grade').find('ul li').removeClass('_active')
+      $slider.siblings('.grade').find('.' + text).addClass('_active')
 
     slide: (e, ui)->
-      text = regCtrl.getTextGradeAndColor(ui.value)
-      $('.grade').find('ul li').removeClass('_active')
-      $('.grade').find('.' + text).addClass('_active')
+      text = regCtrl.getTextGradeAndColor(ui.handle, ui.value)
+      $slider.siblings('.grade').find('ul li').removeClass('_active')
+      $slider.siblings('.grade').find('.' + text).addClass('_active')
 
   })
 
   id = Meteor.user().profile.registration.step
-  if id < _.keys(Meteor.i18nMessages.registration.questions).length
+  if id <= _.keys(Meteor.i18nMessages.registration.questions).length
     console.log 'sameShit'
     if Meteor.user().profile.tests.bigFive.answers[id]
       log Meteor.user().profile.tests.bigFive.answers[id]
       $(@.find('.range-slider')).slider 'value', Meteor.user().profile.tests.bigFive.answers[id]
     else
       $(@.find('.range-slider')).slider 'value', 50
+
+  $('.flip-cont-wrap').removeClass '_ready'
 
 
 Template.testing.helpers {
@@ -517,6 +487,95 @@ Template.testFinish.events {
       $('#s2id_bdayYear').addClass '_valid'
       $('#s2id_bdayYear').removeClass '_invalid'
 
+  changeBackground: ($elem, newImage, callback)->
+
+    MainCtrl.showLoader()
+    url = 'http://d1jfn2lab933y3.cloudfront.net/' + newImage
+    $('<img>').attr('src', url).load ->
+      log 'bg image loaded'
+      newBg = $('<div class="background _new"></div>').css('background-image', 'url(' + url + ')')
+      $elem.find('.background').after newBg
+      MainCtrl.hideLoader()
+      Meteor.setTimeout ->
+        $elem.find('.background').first().next().addClass '_visible'
+      , 50
+      Meteor.setTimeout ->
+        $elem.find('.background').first().remove()
+        if callback
+          callback()
+      , 1000
+
+
+  showBreakFirst: ->
+
+    $('.testing').find('.flip-cont-wrap').removeClass 'flip'
+    $('.testing').find('.break-one').addClass '_visible'
+    $('.testing').find('.break-one').find('h3').addClass '_visible'
+    setTimeout ->
+      $('.testing').find('.break-one').find('h4').addClass '_visible'
+    , 1600
+    setTimeout ->
+      $('.testing').find('.break-one').find('.circle').addClass '_visible'
+    , 4000
+    setTimeout ->
+      $('.testing').find('.break-one').find('button').addClass '_visible'
+    , 8000
+    log 'break activated'
+    id = Meteor.user()._id
+    Meteor.users.update id, {$set: {'profile.registration.breakOne': false}}
+
+  showBreakSecond: ->
+
+    $('.testing').find('.flip-cont-wrap').removeClass 'flip'
+    $('.testing').find('.break-two').addClass '_visible'
+    $('.testing').find('.break-two').find('h3').addClass '_visible'
+    setTimeout ->
+      $('.testing').find('.break-two').find('h4').addClass '_visible'
+    , 1200
+    setTimeout ->
+      $('.testing').find('.break-two').find('.circle').first().addClass '_visible'
+    , 4000
+    setTimeout ->
+      $('.testing').find('.break-two').find('.circle').first().next().addClass '_visible'
+    , 8000
+    setTimeout ->
+      $('.testing').find('.break-two').find('button').addClass '_visible'
+    , 12000
+    log 'break activated'
+    id = Meteor.user()._id
+    Meteor.users.update id, {$set: {'profile.registration.breakTwo': false}}
+
+  breakDone: ->
+
+    $('.breaks').removeClass '_visible'
+    $('.breaks').find('._visible').removeClass '_visible'
+    step = Meteor.user().profile.registration.step
+    pic = do ->
+      if step > 0 and step < 30
+        'images/test_part_2.jpg'
+      else if step > 30 and step < 60
+        'images/test_part_3.jpg'
+    @changeBackground $('.testing'), pic, ->
+      $('.testing').find('.flip-cont-wrap').addClass 'flip'
+      regCtrl.testFurther(false)
+
+  finishTest: ->
+
+    $('.testing').find('.finish').addClass '_visible'
+    $('.testing').find('.finish').find('h3').addClass '_visible'
+    setTimeout ->
+      $('.testing').find('.finish').find('h4').addClass '_visible'
+    , 1600
+    setTimeout ->
+      $('.testing').find('.finish').find('.circle').addClass '_visible'
+    , 4000
+    setTimeout ->
+      $('.testing').find('.finish').find('button').addClass '_visible'
+    , 8000
+
+
+
+
 
 
   infoSlidesInit: ->
@@ -615,10 +674,17 @@ Template.testFinish.events {
       'profile.tests.bigFive.answers': {}
     }}
 
-    @getAndCreateAstroData bYear, bMonth, bDay, bHour, userDataBuffer['birthCity']['timezone'], userDataBuffer['birthCity']['lat'], userDataBuffer['location']['lng']
+    @getAndCreateAstroData bYear, bMonth, bDay, bHour, userDataBuffer['birthCity']['timezone'], userDataBuffer['birthCity']['lat'], userDataBuffer['location']['lng'], ->
+
+      log 'router is rendering testing template from action'
+      $('.reg-step').find('>div').removeClass '_active'
+      $('.reg-step').find('>div').eq(1).addClass '_active'
+      marginTop = 0 - $(window).height()
+      $('.registration').find('.info').css('margin-top', marginTop + 'px')
+      UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
 
 
-  getAndCreateAstroData: (year, month, day, hour, timezone, lat, lng)->
+  getAndCreateAstroData: (year, month, day, hour, timezone, lat, lng, callback)->
     date = {}
     date['year'] = 1989
     date['month'] = 1
@@ -634,26 +700,129 @@ Template.testFinish.events {
         userId = Meteor.user()._id
         Meteor.users.update userId, {$set: {'profile.tests.astro.data': data}}, ->
           console.log 'astro data saved'
-          Router.go 'registration/hello'
+          if callback
+            callback()
 
 
-  getTextGradeAndColor: (val)->
+  getTextGradeAndColor: (handle, val)->
 
+
+    target = $(handle)
     if val < 21
-      $('.range-slider').find('a').css('box-shadow': '0 0 7px #ff7676')
+      target.css('box-shadow': '0 0 7px #ff7676')
       'low'
     else if val > 20 and val < 41
-      $('.range-slider').find('a').css('box-shadow': '0 0 7px #ffb93e')
+      target.css('box-shadow': '0 0 7px #ffb93e')
       'semilow'
     else if val > 40 and val < 61
-      $('.range-slider').find('a').css('box-shadow': '0 0 7px #e8e006')
+      target.css('box-shadow': '0 0 7px #e8e006')
       'mid'
     else if val > 60 and val < 81
-      $('.range-slider').find('a').css('box-shadow': '0 0 7px #b0e806')
+      target.css('box-shadow': '0 0 7px #b0e806')
       'semihigh'
     else if val > 80
-      $('.range-slider').find('a').css('box-shadow': '0 0 7px #4ae40d')
+      target.css('box-shadow': '0 0 7px #4ae40d')
       'high'
+
+
+  testBack: ->
+    if Session.get('testingClicked') is false
+      Session.set('testingClicked', true)
+      id = Meteor.user().profile.registration.step
+      userId = Meteor.user()._id
+      answer = {}
+      answer['profile.tests.bigFive.answers.' + id] = $('.range-slider').slider('value')
+      Meteor.users.update userId, {$set: answer}
+      if id > 1
+        Meteor.users.update userId, {$set: {'profile.registration.step': id - 1}}
+        step = Meteor.user().profile.registration.step
+        testData =  {
+          id: step
+          size: _.keys(Meteor.i18nMessages.registration.questions).length
+          question: __('registration.questions.' + step)
+          low: __('registration.grades.low')
+          semilow: __('registration.grades.semilow')
+          mid: __('registration.grades.mid')
+          semihigh: __('registration.grades.semihigh')
+          high: __('registration.grades.high')
+        }
+        UI.insert UI.renderWithData(Template.testing, testData), $('#tests-container').find('.verso').find('.slide').get(1)
+
+        regCtrl.flipSlideChange($('#tests-container'))
+        Meteor.setTimeout ->
+          Session.set('testingClicked', false)
+        , 1000
+
+
+  testFurther: (incrementStep)->
+    Session.set('regInitialized', true)
+    if Session.get('regInitialized')
+      log 'stage 1'
+      if Session.get('testingClicked') is false
+        log 'stage 2'
+        Session.set('testingClicked', true)
+        id = Meteor.user().profile.registration.step
+        userId = Meteor.user()._id
+        answer = {}
+        answer['profile.tests.bigFive.answers.' + id] = $('.range-slider').slider('value')
+        log $('.range-slider').slider('value')
+        Meteor.users.update userId, {$set: answer}
+        if id < _.keys(Meteor.i18nMessages.registration.questions).length
+          log 'stage 3'
+          regStep = Meteor.user().profile.registration.step
+          log 'trying'
+          if incrementStep
+            Meteor.users.update userId, {$set: {'profile.registration.step': regStep + 1}}
+          Meteor.setTimeout ->
+            Session.set('testingClicked', false)
+          , 1000
+          if regStep is 0
+            UI.insert UI.render(Template.beforeHook), $('#tests-container').find('.recto').find('.flip-cont').get(0)
+            Meteor.setTimeout ->
+              $('#tests-container').addClass '_ready'
+            , 600
+          else if regStep is 25 and Meteor.user().profile.registration.breakOne
+            $('#tests-container').removeClass 'flip'
+            Meteor.setTimeout ->
+              regCtrl.changeBackground $('.testing'), 'images/test_break_one.jpg', ->
+                regCtrl.showBreakFirst()
+            , 500
+          else if regStep is 50 and Meteor.user().profile.registration.breakTwo
+            $('#tests-container').removeClass 'flip'
+            Meteor.setTimeout ->
+              regCtrl.changeBackground $('.testing'), 'images/test_break_two.jpg', ->
+                regCtrl.showBreakSecond()
+            , 500
+#          else if regStep is 75
+#            $('#tests-container').removeClass 'flip'
+#            Meteor.setTimeout ->
+#              regCtrl.changeBackground $('.testing'), 'images/test_finish.jpg', ->
+#                regCtrl.finishTest()
+#            , 500
+          else
+            log 'stage 4'
+            step = Meteor.user().profile.registration.step
+            testData =  {
+              id: step
+              size: _.keys(Meteor.i18nMessages.registration.questions).length
+              question: __('registration.questions.' + step)
+              low: __('registration.grades.low')
+              semilow: __('registration.grades.semilow')
+              mid: __('registration.grades.mid')
+              semihigh: __('registration.grades.semihigh')
+              high: __('registration.grades.high')
+            }
+            UI.insert UI.renderWithData(Template.testing, testData), $('#tests-container').find('.verso').find('.slide').get(1)
+            regCtrl.flipSlideChange($('#tests-container'))
+
+        else
+          bigFive.calc()
+          $('#tests-container').removeClass 'flip'
+          Meteor.setTimeout ->
+            regCtrl.changeBackground $('.testing'), 'images/test_finish.jpg', ->
+              regCtrl.finishTest()
+          , 500
+
 
 }
 

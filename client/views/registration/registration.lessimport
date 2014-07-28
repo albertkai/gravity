@@ -101,7 +101,7 @@
     height: 100%;
     overflow-y: scroll;
     >.wrap{
-      min-height: 700px;
+      min-height: 720px;
       width: 100%;
       height: 100%;
       >.background{
@@ -110,7 +110,6 @@
       }
       .insertion{
         height: 100%;
-        width: 100%;
       }
     }
   }
@@ -195,6 +194,7 @@
     left: 0;
     z-index: 100;
     visibility: hidden;
+    overflow: hidden;
     &._visible{
       visibility: visible;
     }
@@ -409,7 +409,7 @@
         font-size: 34px;
         font-weight: 400;
         margin-left: 30px;
-        margin-right: 400px;
+        margin-right: 300px;
         visibility: hidden;
         opacity: 0;
         .translate(-70px, 0);
@@ -1054,6 +1054,35 @@
           margin-top: 275px;
           &#test-further{
             .pull-right();
+          }
+        }
+        .tltp{
+          position: absolute;
+          width: 190px;
+          left: 50%;
+          top: 194px;
+          margin-left: 40px;
+          padding: 5px;
+          background: rgba(70, 130, 255, .8);
+          color: white;
+          .rounded(5px);
+          visibility: hidden;
+          opacity: 0;
+          .transition(1s);
+          .translate(50px, 0);
+          &._visible{
+            .translate(0, 0);
+            opacity: 1;
+            visibility: visible;
+          }
+          >div{
+            position: absolute;
+            left: -7px;
+            top: 50%;
+            margin-top: -7px;
+            border-right: 7px solid rgba(70, 130, 255, .8);
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
           }
         }
         .range-slider{

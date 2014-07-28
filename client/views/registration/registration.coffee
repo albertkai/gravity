@@ -16,6 +16,7 @@ Template.registration.rendered = ->
   MainCtrl['loader'].setFPS(51)
   log 'registration/hello, found user'
   status = Meteor.user().profile.registration.status
+  step = Meteor.user().profile.registration.step
   if status is "justRegistered"
     log 'router is rendering info template from action'
     UI.insert UI.render(Template.info), $('#info-insert').get(0)
@@ -297,6 +298,14 @@ Template.breakTwo.events = {
 Template.testing.rendered = ->
 
 
+  step = Meteor.user().profile.registration.step
+  if step is 1
+    setTimeout =>
+      $(@.find('.tltp')).addClass '_visible'
+      setTimeout =>
+        $(@.find('.tltp')).removeClass '_visible'
+      , 4000
+    , 2000
   $slider = $(@.find('.range-slider'))
   $(@.find('.range-slider')).slider({
 

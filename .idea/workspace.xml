@@ -26,31 +26,26 @@
       <file leaf-file-name="registration.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/registration/registration.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="31" selection-start="97" selection-end="97" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="13035">
+            <state line="765" column="72" selection-start="45666" selection-end="45666" vertical-scroll-proportion="-17.958334" vertical-offset="2119" max-vertical-offset="4185">
               <folding>
+                <element signature="tag#header#0;tag#section#0;tag#template#0" expanded="false" />
+                <element signature="tag#footer#0;tag#section#0;tag#template#0" expanded="false" />
+                <element signature="tag#section#0;tag#section#0;tag#template#0" expanded="false" />
                 <element signature="n#style#0;n#div#0;n#section#0;n#section#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#section#1;n#section#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="tag#template#2" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="registration.coffee" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="registration.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/views/registration/registration.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="317" column="10" selection-start="10808" selection-end="10808" vertical-scroll-proportion="-88.05556" vertical-offset="0" max-vertical-offset="12570">
+            <state line="308" column="38" selection-start="10510" selection-end="10510" vertical-scroll-proportion="0.28384992" vertical-offset="4446" max-vertical-offset="12705">
               <folding>
-                <element signature="e#28360#40962#0" expanded="false" />
+                <element signature="e#28630#41232#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/coffee/main.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="27" selection-start="249" selection-end="275" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -67,7 +62,7 @@
       <file leaf-file-name="fixture.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/fixture.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="130" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+            <state line="0" column="0" selection-start="1" selection-end="130" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
               <folding />
             </state>
           </provider>
@@ -76,7 +71,7 @@
       <file leaf-file-name="router.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/coffee/router.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="14" selection-start="857" selection-end="857" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1950">
+            <state line="1" column="30" selection-start="49" selection-end="49" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1950">
               <folding>
                 <marker date="1406470935000" expanded="true" signature="953:1025" placeholder="..." />
                 <marker date="1406470935000" expanded="true" signature="1202:1380" placeholder="..." />
@@ -94,10 +89,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="registration.lessimport" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="registration.lessimport" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/registration/registration.lessimport">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="20" selection-start="3035" selection-end="3035" vertical-scroll-proportion="0.83064514" vertical-offset="1165" max-vertical-offset="19140">
+            <state line="1070" column="23" selection-start="30706" selection-end="30706" vertical-scroll-proportion="-6.82" vertical-offset="15709" max-vertical-offset="19575">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bigfive.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/modules/bigfive.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="48" column="52" selection-start="2324" selection-end="2324" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
               <folding />
             </state>
           </provider>
@@ -173,10 +177,10 @@
         <option value="$PROJECT_DIR$/client/coffee/main.coffee" />
         <option value="$PROJECT_DIR$/client/views/main.less" />
         <option value="$PROJECT_DIR$/client/coffee/router.coffee" />
-        <option value="$PROJECT_DIR$/client/views/registration/registration.coffee" />
-        <option value="$PROJECT_DIR$/server/fixture.coffee" />
         <option value="$PROJECT_DIR$/client/views/registration/registration.html" />
         <option value="$PROJECT_DIR$/client/views/registration/registration.lessimport" />
+        <option value="$PROJECT_DIR$/server/fixture.coffee" />
+        <option value="$PROJECT_DIR$/client/views/registration/registration.coffee" />
       </list>
     </option>
   </component>
@@ -258,6 +262,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gravity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gravity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -577,11 +599,6 @@
         <state line="7" column="21" selection-start="156" selection-end="156" vertical-scroll-proportion="-2.142857" vertical-offset="0" max-vertical-offset="240" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/modules/bigfive.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="52" selection-start="2324" selection-end="2324" vertical-scroll-proportion="-16.68" vertical-offset="303" max-vertical-offset="1215" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/publications.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="21" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="105">
@@ -624,34 +641,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/i18n.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="263" column="6" selection-start="9506" selection-end="9506" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4095">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/main.less">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="18" selection-start="363" selection-end="363" vertical-scroll-proportion="-13.75" vertical-offset="0" max-vertical-offset="1875">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/coffee/router.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="14" selection-start="857" selection-end="857" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1950">
-          <folding>
-            <marker date="1406470935000" expanded="true" signature="953:1025" placeholder="..." />
-            <marker date="1406470935000" expanded="true" signature="1202:1380" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -669,36 +662,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/registration/registration.coffee">
+    <entry file="file://$PROJECT_DIR$/lib/i18n.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="317" column="10" selection-start="10808" selection-end="10808" vertical-scroll-proportion="-88.05556" vertical-offset="0" max-vertical-offset="12570">
-          <folding>
-            <element signature="e#28360#40962#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/fixture.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="130" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="670">
+        <state line="263" column="6" selection-start="9506" selection-end="9506" vertical-scroll-proportion="5.8880596" vertical-offset="0" max-vertical-offset="4095">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/registration/registration.html">
+    <entry file="file://$PROJECT_DIR$/client/modules/bigfive.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="31" selection-start="97" selection-end="97" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="13035">
+        <state line="48" column="52" selection-start="2324" selection-end="2324" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/coffee/router.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="30" selection-start="49" selection-end="49" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1950">
           <folding>
-            <element signature="n#style#0;n#div#0;n#section#0;n#section#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#section#1;n#section#0;n#template#0;n#!!top" expanded="true" />
+            <marker date="1406470935000" expanded="true" signature="953:1025" placeholder="..." />
+            <marker date="1406470935000" expanded="true" signature="1202:1380" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views/registration/registration.lessimport">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="20" selection-start="3035" selection-end="3035" vertical-scroll-proportion="0.83064514" vertical-offset="1165" max-vertical-offset="19140">
+        <state line="1070" column="23" selection-start="30706" selection-end="30706" vertical-scroll-proportion="-6.82" vertical-offset="15709" max-vertical-offset="19575">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/registration/registration.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="765" column="72" selection-start="45666" selection-end="45666" vertical-scroll-proportion="-17.958334" vertical-offset="2119" max-vertical-offset="4185">
+          <folding>
+            <element signature="tag#header#0;tag#section#0;tag#template#0" expanded="false" />
+            <element signature="tag#footer#0;tag#section#0;tag#template#0" expanded="false" />
+            <element signature="tag#section#0;tag#section#0;tag#template#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#section#0;n#section#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#section#1;n#section#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="tag#template#2" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/controllers.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/fixture.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="1" selection-end="130" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="670">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/registration/registration.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="308" column="38" selection-start="10510" selection-end="10510" vertical-scroll-proportion="0.28384992" vertical-offset="4446" max-vertical-offset="12705">
+          <folding>
+            <element signature="e#28630#41232#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -24,9 +24,13 @@
 
         <section id="info-block" class="info">
 
+            <div class="wrap">
+
             <div class="background" style="background-image: url(http://d1jfn2lab933y3.cloudfront.net/images/info_bg.jpg);"></div>
 
             <div id="info-insert" class="insertion container"></div>
+
+            </div>
 
         </section>
 
@@ -123,7 +127,7 @@
                                 самым интересным;)
                             </p>
                         </div>
-                        <button><i class="fa fa-chevron-down"></i><br/>НАЧНЕМ</button>
+                        <button class="finish-test"><i class="fa fa-chevron-down"></i><br/>НАЧНЕМ</button>
 
                     </div>
 
@@ -133,11 +137,57 @@
 
         </section>
 
-        <section class="interview">
+        <section class="johari">
 
-            <div class="background"></div>
+            <div class="wrap">
 
-            <div id="interview-insert" class="insertion"></div>
+            <div class="background _visible" style="background-image: url(http://d1jfn2lab933y3.cloudfront.net/images/johari_bg.jpg);"></div>
+
+            <div id="johari-insert" class="insertion"></div>
+
+            <div class="start">
+                <div class="container">
+                    <h3>ОКНО ДЖОХАРИ</h3>
+                    <h4>Насколько хорошо вы себя знаете?</h4>
+                    <div class="circle huge">
+                        <p>
+                            Окно Джохари -<br/>
+                            один из самых интересных<br/>
+                            психологических тестов. Суть<br/>
+                            его в том, что вы, а также люди,<br/>
+                            которые вас хорошо знают, отмечаете,<br/>
+                            какие личностные черты вы считаете<br/>
+                            присущими вашей персоне. И на основе<br/>
+                            пересечения ваших ответов, можно<br/>
+                            выделить 4 зоны - то о вас, что<br/>
+                            знают все, то, что знаете вы,<br/>
+                            то, что замечают только другие,<br/>
+                            и то, чего не замечено за вами.<br/>
+                            Также помогает определить<br/>
+                            степень целостности<br/>
+                            личности<br/>
+                        </p>
+
+                    </div>
+                    <div class="circle small">
+                        <p>
+                            Не волнуйтесь,<br/>
+                            вам не нужно будет<br/>
+                            сразу рассылать это всем,<br/>
+                            это можно будет сделать и позже.<br/>
+                            Сейчас можете заполнить только вы.<br/>
+                            Но помните, чем больше близких<br/>
+                            людей заполнят его,<br/>
+                            тем выше будет<br/>
+                            точность!
+                        </p>
+
+                    </div>
+                    <button>ПРИСТУПИМ!</button>
+                </div>
+            </div>
+
+            </div>
 
         </section>
 
@@ -759,6 +809,11 @@
                 <h4><span>{{id}}</span> из <span>{{size}}</span></h4>
 
                 <h3>Насколько точно вас описывает фраза<br/><span>{{question}}</span></h3>
+
+                <div class="symbols">
+                    <div class="plus">+</div>
+                    <div class="minus">-</div>
+                </div>
 
                 <div class="range-slider"></div>
 

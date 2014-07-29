@@ -104,6 +104,63 @@ label.error{
 }
 
 
+//jQuery UI Slider
+
+.ui-slider-handle{
+  cursor: pointer !important;
+}
+
+//Notify
+
+.ui-pnotify{
+
+  .ui-pnotify-container{
+
+    background: rgba(0, 0, 0, .60);
+    border: 0;
+    color: white;
+
+    &.alert-danger{
+      background: rgba(244, 30, 0, 0.60);
+    }
+
+    &.alert-success{
+      background: rgba(0, 244, 32, 0.60);
+    }
+
+    &.alert-info{
+      background: rgba(0, 199, 244, 0.60);
+    }
+
+    .ui-pnotify-closer{
+
+      color: white;
+
+    }
+
+    .ui-pnotify-icon{
+
+      color: white;
+
+    }
+
+    .ui-pnotify-title{
+
+      color: white;
+
+    }
+
+    .ui-pnotify-text{
+
+      color: white;
+
+    }
+
+  }
+
+}
+
+
 //Utils
 
 .notransition {
@@ -113,6 +170,10 @@ label.error{
   -ms-transition: none !important;
   transition: none !important;
 }
+
+
+
+
 
 
 @import 'registration/registration.lessimport';

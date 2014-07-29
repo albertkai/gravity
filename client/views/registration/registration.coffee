@@ -5,6 +5,22 @@
 
 Session.set('regInitialized', false)
 Session.set('testingClicked', false)
+Session.set('clickFifties', 0)
+
+Deps.autorun ->
+  if Session.get('clickFifties') is 10
+
+    MainCtrl.notify 'Вы не перемещали слайдер 10 раз подряд:(', 'Возожно вы не очень внимательно заполняете тест? Помните, он очень важен!'
+
+  else if Session.get('clickFifties') is 15
+
+    MainCtrl.notify 'Вы не перемещали слайдер 15 раз подряд:(', 'Такое конечно бывает, но это большая редкость! Пожалуйста, будьте внимательнее..'
+
+  else if Session.get('clickFifties') is 30
+
+    MainCtrl.notify 'Печаль:(', 'К сожалению, мы не можем принять ваши результаты:(', 'error'
+    Meteor.users.update Meteor.user()._id, {$set: {'profile.registration.step': 0}}
+    Meteor.logout()
 
 Template.registration.rendered = ->
   log 'reg template rendered'
@@ -14,14 +30,13 @@ Template.registration.rendered = ->
   MainCtrl['loader'].setDensity(66)
   MainCtrl['loader'].setRange(1)
   MainCtrl['loader'].setFPS(51)
-  log 'registration/hello, found user'
   status = Meteor.user().profile.registration.status
   step = Meteor.user().profile.registration.step
   if status is "justRegistered"
-    log 'router is rendering info template from action'
+    log 'rendering info template from action registration rendered callback'
     UI.insert UI.render(Template.info), $('#info-insert').get(0)
   else if status is "testing"
-    log 'router is rendering testing template from action'
+    log 'rendering testing template from registration rendered callback'
     $('.reg-step').find('>div').removeClass '_active'
     $('.reg-step').find('>div').eq(1).addClass '_active'
     marginTop = 0 - $(window).height()
@@ -31,6 +46,17 @@ Template.registration.rendered = ->
       $('.registration').find('.info').removeClass 'notransition'
     , 200
     UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
+  else if status is "johari"
+    log 'rendering testing template from registration rendered callback'
+    $('.reg-step').find('>div').removeClass '_active'
+    $('.reg-step').find('>div').eq(2).addClass '_active'
+    marginTop = 0 - ($(window).height() * 2)
+    $('.registration').find('.info').addClass 'notransition'
+    $('.registration').find('.info').css('margin-top', marginTop + 'px')
+    setTimeout ->
+      $('.registration').find('.info').removeClass 'notransition'
+    , 200
+    regCtrl.johariIntro()
   $(window).resize ->
     $('.registration').find('.info').addClass 'notransition'
     index = $('.reg-step').find('>div._active').index()
@@ -38,28 +64,28 @@ Template.registration.rendered = ->
     _.debounce ->
       $('.registration').find('.info').removeClass 'notransition'
     , 100
-#  status = Meteor.user().profile.registration.status
-#  if status is "justRegistered"
-#    UI.insert UI.render(Template.info), $('#info-insert').get(0)
-#  else if status is "testing"
-#    $('.reg-step').find('>div').removeClass '_active'
-#    $('.reg-step').find('>div').eq(1).addClass '_active'
-#    marginTop = 0 - $(window).height()
-#    $('.registration').find('.info').css('margin-top', marginTop + 'px')
-#    UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
+
 
 Template.registration.events {
+
   'click .breaks .further': ->
+
     regCtrl.breakDone()
 
+  'click .breaks.finish .finish-test': ->
+
+    regCtrl.goToJohari()
+
   'click .logout a': (e)->
+
     e.preventDefault()
+
     Meteor.logout ->
+
       Session.set('usersLoaded', false)
-      new PNotify {
-        title: 'До встречи!'
-        text: 'Ждем вас снова!:)'
-      }
+      Session.set('regInitialized', false)
+      MainCtrl.notify 'До встречи!', 'Ждем вас снова!:)'
+      Router.go '/'
 }
 
 
@@ -92,6 +118,8 @@ Template.beforeHook.rendered = ->
 Template.testing_cont.rendered = ->
 
   log 'testing rendered'
+
+  log 'Session val:' +  Session.get('regInitialized')
 
   if Session.get('regInitialized') is false
 
@@ -281,20 +309,6 @@ Template.beforeHook.events {
 
 }
 
-Template.breakOne.events = {
-  'click button': ->
-    userId = Meteor.user()._id
-    Meteor.users.update userId, {$set: {'profile.registration.breakOne': false}}
-#    Router.go 'registration/test'
-}
-
-Template.breakTwo.events = {
-  'click button': ->
-    userId = Meteor.user()._id
-    Meteor.users.update userId, {$set: {'profile.registration.breakTwo': false}}
-#    Router.go 'registration/test'
-}
-
 Template.testing.rendered = ->
 
 
@@ -409,9 +423,6 @@ Template.testFinish.events {
   flipSlidesInit: ->
 
     $('.flip-cont-wrap').find('.verso').find('.slide').first().addClass('_visible')
-#    width = $('.flip-cont-wrap').find('.verso').width()
-#    $('.flip-cont-wrap').find('.verso').find('.slide').width(width)
-#    $('.flip-cont-wrap').find('.slide-back').attr('disabled', true)
 
   validateInfo: (slide)->
 
@@ -438,11 +449,8 @@ Template.testFinish.events {
           slide.addClass '_validated'
           Router.go 'registration/hello'
       else
-        new PNotify {
-          title: 'Печаль:('
-          text: 'Форма заполнена некорректно, обратите внимание на подсвеченные красным поля!'
-          type: 'error'
-        }
+
+        MainCtrl.notify 'Печаль:(', 'Форма заполнена некорректно, обратите внимание на подсвеченные красным поля!', 'error'
 
     else if slide.index() is 1
 
@@ -587,6 +595,8 @@ Template.testFinish.events {
 
 
 
+
+
   infoSlidesInit: ->
 
     $('.info-cont-wrap').find('.verso').find('.slide').first().addClass('_active').addClass('_viewed')
@@ -685,7 +695,7 @@ Template.testFinish.events {
 
     @getAndCreateAstroData bYear, bMonth, bDay, bHour, userDataBuffer['birthCity']['timezone'], userDataBuffer['birthCity']['lat'], userDataBuffer['location']['lng'], ->
 
-      log 'router is rendering testing template from action'
+      log 'saved astro data and changing registration pane to testing!'
       $('.reg-step').find('>div').removeClass '_active'
       $('.reg-step').find('>div').eq(1).addClass '_active'
       marginTop = 0 - $(window).height()
@@ -773,7 +783,13 @@ Template.testFinish.events {
         id = Meteor.user().profile.registration.step
         userId = Meteor.user()._id
         answer = {}
-        answer['profile.tests.bigFive.answers.' + id] = $('.range-slider').slider('value')
+        val = $('.range-slider').slider('value')
+        answer['profile.tests.bigFive.answers.' + id] = val
+        if val is 50
+          clickedFifties = Session.get('clickFifties') + 1
+          Session.set('clickFifties', clickedFifties)
+        else
+          Session.set 'clickFifties', 0
         log $('.range-slider').slider('value')
         Meteor.users.update userId, {$set: answer}
         if id < _.keys(Meteor.i18nMessages.registration.questions).length
@@ -831,6 +847,39 @@ Template.testFinish.events {
             regCtrl.changeBackground $('.testing'), 'images/test_finish.jpg', ->
               regCtrl.finishTest()
           , 500
+
+
+  goToJohari: ->
+
+    log 'saved bigFivr data and changing registration pane to johari!'
+    Meteor.users.update Meteor.user()._id, {$set: {'profile.registration.status': 'johari'}}
+    $('.reg-step').find('>div').removeClass '_active'
+    $('.reg-step').find('>div').eq(2).addClass '_active'
+    marginTop = 0 - ($(window).height() * 2)
+    $('.registration').find('.info').css('margin-top', marginTop + 'px')
+    setTimeout ->
+      regCtrl.johariIntro()
+    , 1000
+
+  johariIntro: ->
+
+    $cont = $('.johari').find('.start')
+    $cont.addClass '_visible'
+    $cont.find('h3').addClass '_visible'
+    setTimeout ->
+      $cont.find('h4').addClass '_visible'
+    , 1200
+    setTimeout ->
+      $cont.find('.circle').first().addClass '_visible'
+    , 4000
+    setTimeout ->
+      $cont.find('.circle').first().next().addClass '_visible'
+    , 8000
+    setTimeout ->
+      $cont.find('button').addClass '_visible'
+    , 12000
+    log 'johari intro initialized'
+
 
 
 }

@@ -29,7 +29,7 @@ Router.map ->
   }
 
   @route 'hello', {
-    layoutTemplate: 'hello'
+    template: 'hello'
     onBeforeAction: ->
       if Meteor.user()
         @redirect '/'
@@ -97,11 +97,11 @@ Router.map ->
 #        $('.registration').find('.info').css('margin-top', marginTop + 'px')
 #        UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
 #  }
-
-  @route 'registration/finish', {
-    template: 'testFinish'
-    layoutTemplate: 'registration'
-  }
+#
+#  @route 'registration/finish', {
+#    template: 'testFinish'
+#    layoutTemplate: 'registration'
+#  }
 
 
 

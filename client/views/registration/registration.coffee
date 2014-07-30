@@ -341,18 +341,28 @@ Template.johari.events {
 
     e.preventDefault()
 
-    if $('.trait._selected').length is 5
+#    if $('.trait._selected').length is 5
+#
+#      MainCtrl.notify 'Отлично!', 'Тест пройден!', 'success'
+#      $('#johari-container').removeClass('flip').addClass('_ready')
+#
+#    else if $('.trait._selected').length < 5
+#
+#      MainCtrl.notify 'Упсики!:(', 'Вы должны выбрать ровно 5 определений личности!', 'error'
+#
+#    else if $('.trait._selected').length > 5
+#
+#      MainCtrl.notify 'Пиздец!:)', 'Зачем ты занимаешься бредом?))', 'error'
+    results = {}
+    $('.trait').each ->
+      alias = $(this).data('value')
+      if $(this).hasClass '_selected'
+        results[alias] = 1
+      else
+        results[alias] = 0
 
-      MainCtrl.notify 'Отлично!', 'Тест пройден!', 'success'
-      $('#johari-container').removeClass('flip').addClass('_ready')
+    Johari.init Meteor.user(), results
 
-    else if $('.trait._selected').length < 5
-
-      MainCtrl.notify 'Упсики!:(', 'Вы должны выбрать ровно 5 определений личности!', 'error'
-
-    else if $('.trait._selected').length > 5
-
-      MainCtrl.notify 'Пиздец!:)', 'Зачем ты занимаешься бредом?))', 'error'
 
   'click #registration-finish': (e)->
 

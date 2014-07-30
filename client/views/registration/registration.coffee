@@ -61,9 +61,11 @@ Template.registration.rendered = ->
     $('.registration').find('.info').addClass 'notransition'
     index = $('.reg-step').find('>div._active').index()
     $('.registration').find('.info').css('margin-top', $(window).height() * index * -1 + 'px')
-    _.debounce ->
+    debouncedFunc = _.debounce ->
+      log 'debounced'
       $('.registration').find('.info').removeClass 'notransition'
-    , 100
+    , 500
+    debouncedFunc()
 
 
 Template.registration.events {
@@ -75,6 +77,10 @@ Template.registration.events {
   'click .breaks.finish .finish-test': ->
 
     regCtrl.goToJohari()
+
+  'click .johari .johari-start': ->
+
+    regCtrl.johariStart()
 
   'click .logout a': (e)->
 
@@ -115,6 +121,40 @@ Template.beforeHook.rendered = ->
   , 13000
 
 
+
+Template.beforeHook.events {
+
+  'click button': (e)->
+
+    currentUserId = Meteor.user()._id
+    Meteor.users.update currentUserId, {
+      $set: {'profile.registration.step': 1}
+    }
+    $(e.currentTarget).closest('div').find('*').removeClass '_visible'
+    Meteor.setTimeout ->
+      $(e.currentTarget).closest('div').empty()
+      $('#tests-container').addClass 'flip'
+      log 'endering testing template from beforeHook::events'
+#      $('#testing-insert').empty()
+#      UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
+      $('#tests-container').find('.verso').find('.slide').empty()
+      step = Meteor.user().profile.registration.step
+      testData =  {
+        id: step
+        size: _.keys(Meteor.i18nMessages.registration.questions).length
+        question: __('registration.questions.' + step)
+        low: __('registration.grades.low')
+        semilow: __('registration.grades.semilow')
+        mid: __('registration.grades.mid')
+        semihigh: __('registration.grades.semihigh')
+        high: __('registration.grades.high')
+      }
+      UI.insert UI.renderWithData(Template.testing, testData), $('#tests-container').find('.verso').find('.slide').first().get(0)
+    , 800
+
+}
+
+
 Template.testing_cont.rendered = ->
 
   log 'testing rendered'
@@ -148,11 +188,6 @@ Template.testing_cont.rendered = ->
         }
       UI.insert UI.renderWithData(Template.testing, testData), $('#tests-container').find('.verso').find('.slide').first().get(0)
       $('#tests-container').addClass 'flip'
-#      $('#tests-container').removeClass 'flip'
-#      Meteor.setTimeout ->
-#        regCtrl.changeBackground $('.testing'), 'images/test_break_two.jpg', ->
-#          regCtrl.showBreakSecond()
-#      , 500
 
 
 
@@ -280,37 +315,61 @@ Template.info.events {
 
 }
 
-Template.beforeHook.events {
 
-  'click button': (e)->
+Template.johari.rendered = ->
 
-    currentUserId = Meteor.user()._id
-    Meteor.users.update currentUserId, {
-      $set: {'profile.registration.step': 1}
-    }
-    $(e.currentTarget).closest('div').find('*').removeClass '_visible'
-    Meteor.setTimeout ->
-      $(e.currentTarget).closest('div').empty()
-      $('#tests-container').addClass 'flip'
-      log 'router is rendering testing template from action'
-      $('.reg-step').find('>div').removeClass '_active'
-      $('.reg-step').find('>div').eq(1).addClass '_active'
-      marginTop = 0 - $(window).height()
-      $('.registration').find('.info').addClass 'notransition'
-      $('.registration').find('.info').css('margin-top', marginTop + 'px')
-      setTimeout ->
-        $('.registration').find('.info').removeClass 'notransition'
-      , 200
-      UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
-    , 800
+  setTimeout =>
+    $(@.find('.flip-cont-wrap')).addClass 'flip'
+  , 200
 
 
+Template.johari.events {
+  'click .trait': (e)->
 
+    if !$(e.currentTarget).hasClass('_selected')
+
+      if $('.trait._selected').length < 5
+        $(e.currentTarget).addClass '_selected'
+      else
+        MainCtrl.notify 'Вы пытаетесь выбрать больше 5 пунктов', 'Можете убрать выделение с другой черты, если считаете, что эта подходит больше', 'error'
+
+    else
+
+      $(e.currentTarget).removeClass('_selected')
+
+  'click #submit-johari': (e)->
+
+    e.preventDefault()
+
+    if $('.trait._selected').length is 5
+
+      MainCtrl.notify 'Отлично!', 'Тест пройден!', 'success'
+      $('#johari-container').removeClass('flip').addClass('_ready')
+
+    else if $('.trait._selected').length < 5
+
+      MainCtrl.notify 'Упсики!:(', 'Вы должны выбрать ровно 5 определений личности!', 'error'
+
+    else if $('.trait._selected').length > 5
+
+      MainCtrl.notify 'Пиздец!:)', 'Зачем ты занимаешься бредом?))', 'error'
+
+  'click #registration-finish': (e)->
+
+    e.preventDefault()
+#    Johary.johariInit()
+    $('#johari-container').removeClass('_ready')
+    $('.background').removeClass '_visible'
+    Meteor.users.update Meteor.user()._id, {$set: {'profile.registration.status': 'tested'}}
+    username = Meteor.user().profile.username
+    setTimeout ->
+      Router.go('/' + username)
 
 }
 
-Template.testing.rendered = ->
 
+
+Template.testing.rendered = ->
 
   step = Meteor.user().profile.registration.step
   if step is 1
@@ -365,20 +424,6 @@ Template.testing.helpers {
 }
 
 
-
-Template.testFinish.events {
-  'click .finish': ->
-    userId = Meteor.user()._id
-    username = Meteor.user().profile.username
-    Meteor.users.update userId, {$set: {'profile.registration.status': 'tested'}}
-    Router.go '/' + username
-
-  'click .interview': ->
-    Router.go 'registration/interview'
-}
-
-
-
 @initializeAutocomplete = ->
 
   $('#maps-loader').css('display', 'none')
@@ -401,9 +446,6 @@ Template.testFinish.events {
     Meteor.setTimeout ->
       $('.info-cont-wrap').addClass '_ready'
     , 800
-#    Meteor.setTimeout ->
-#      $('.hello-cloud').addClass '_small'
-#    , 3000
     Meteor.setTimeout ->
       $('.info-cont-wrap').find('.recto').find('h1').addClass '_visible'
     , 2000
@@ -700,6 +742,7 @@ Template.testFinish.events {
       $('.reg-step').find('>div').eq(1).addClass '_active'
       marginTop = 0 - $(window).height()
       $('.registration').find('.info').css('margin-top', marginTop + 'px')
+      $('#testing-insert').empty()
       UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
 
 
@@ -863,22 +906,32 @@ Template.testFinish.events {
 
   johariIntro: ->
 
-    $cont = $('.johari').find('.start')
-    $cont.addClass '_visible'
-    $cont.find('h3').addClass '_visible'
+#    $cont = $('.johari').find('.start')
+#    $cont.addClass '_visible'
+#    $cont.find('h3').addClass '_visible'
+#    setTimeout ->
+#      $cont.find('h4').addClass '_visible'
+#    , 1200
+#    setTimeout ->
+#      $cont.find('.circle').first().addClass '_visible'
+#    , 4000
+#    setTimeout ->
+#      $cont.find('.circle').first().next().addClass '_visible'
+#    , 8000
+#    setTimeout ->
+#      $cont.find('button').addClass '_visible'
+#    , 12000
+#    log 'johari intro initialized'
+    @johariStart()
+
+  johariStart: ->
+
+    log 'starting johary'
+    $('.johari').find('.start').find('*').removeClass '_visible'
     setTimeout ->
-      $cont.find('h4').addClass '_visible'
-    , 1200
-    setTimeout ->
-      $cont.find('.circle').first().addClass '_visible'
-    , 4000
-    setTimeout ->
-      $cont.find('.circle').first().next().addClass '_visible'
-    , 8000
-    setTimeout ->
-      $cont.find('button').addClass '_visible'
-    , 12000
-    log 'johari intro initialized'
+      $('.johari').find('.start').removeClass '_visible'
+      UI.insert UI.render(Template.johari), $('#johari-insert').get(0)
+    , 1000
 
 
 

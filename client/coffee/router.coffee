@@ -3,6 +3,10 @@ Router.configure {
   loadingTemplate: 'loading'
 }
 
+Router.onBeforeAction ->
+  if Response.deviceW() < 900
+    @go 'mobile'
+
 Router.map ->
 
   @route 'base', {
@@ -43,6 +47,8 @@ Router.map ->
       else
 #        @render()
   }
+
+  @route 'mobile'
 
   @route 'registration/hello', {
     layoutTemplate: 'registrationLayout'

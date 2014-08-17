@@ -316,69 +316,6 @@ Template.info.events {
 }
 
 
-Template.johari.rendered = ->
-
-  setTimeout =>
-    $(@.find('.flip-cont-wrap')).addClass 'flip'
-  , 200
-
-
-Template.johari.events {
-  'click .trait': (e)->
-
-    if !$(e.currentTarget).hasClass('_selected')
-
-      if $('.trait._selected').length < 5
-        $(e.currentTarget).addClass '_selected'
-      else
-        MainCtrl.notify 'Вы пытаетесь выбрать больше 5 пунктов', 'Можете убрать выделение с другой черты, если считаете, что эта подходит больше', 'error'
-
-    else
-
-      $(e.currentTarget).removeClass('_selected')
-
-  'click #submit-johari': (e)->
-
-    e.preventDefault()
-
-#    if $('.trait._selected').length is 5
-#
-#      MainCtrl.notify 'Отлично!', 'Тест пройден!', 'success'
-#      $('#johari-container').removeClass('flip').addClass('_ready')
-#
-#    else if $('.trait._selected').length < 5
-#
-#      MainCtrl.notify 'Упсики!:(', 'Вы должны выбрать ровно 5 определений личности!', 'error'
-#
-#    else if $('.trait._selected').length > 5
-#
-#      MainCtrl.notify 'Пиздец!:)', 'Зачем ты занимаешься бредом?))', 'error'
-    results = {}
-    $('.trait').each ->
-      alias = $(this).data('value')
-      if $(this).hasClass '_selected'
-        results[alias] = 1
-      else
-        results[alias] = 0
-
-    Johari.init Meteor.user(), results
-
-
-  'click #registration-finish': (e)->
-
-    e.preventDefault()
-#    Johary.johariInit()
-    $('#johari-container').removeClass('_ready')
-    $('.background').removeClass '_visible'
-    Meteor.users.update Meteor.user()._id, {$set: {'profile.registration.status': 'tested'}}
-    username = Meteor.user().profile.username
-    setTimeout ->
-      Router.go('/' + username)
-
-}
-
-
-
 Template.testing.rendered = ->
 
   step = Meteor.user().profile.registration.step
@@ -560,7 +497,8 @@ Template.testing.helpers {
 
     MainCtrl.showLoader()
     url = 'http://d1jfn2lab933y3.cloudfront.net/' + newImage
-    $('<img>').attr('src', url).load ->
+#    $('<img>').attr('src', url).load ->
+    if true
       log 'bg image loaded'
       newBg = $('<div class="background _new"></div>').css('background-image', 'url(' + url + ')')
       $elem.find('.background').after newBg
@@ -643,12 +581,6 @@ Template.testing.helpers {
     , 8000
 
 
-
-
-
-
-
-
   infoSlidesInit: ->
 
     $('.info-cont-wrap').find('.verso').find('.slide').first().addClass('_active').addClass('_viewed')
@@ -678,8 +610,6 @@ Template.testing.helpers {
       $cont.find('.slider-wrap').find('.slide').first().remove()
       $cont.find('.slider-wrap').find('.slide').first().addClass('_visible')
     , 500
-
-
 
 
   fillInLocalCity: ->
@@ -904,7 +834,7 @@ Template.testing.helpers {
 
   goToJohari: ->
 
-    log 'saved bigFivr data and changing registration pane to johari!'
+    log 'saved bigFive data and changing registration pane to johari!'
     Meteor.users.update Meteor.user()._id, {$set: {'profile.registration.status': 'johari'}}
     $('.reg-step').find('>div').removeClass '_active'
     $('.reg-step').find('>div').eq(2).addClass '_active'
@@ -916,23 +846,23 @@ Template.testing.helpers {
 
   johariIntro: ->
 
-#    $cont = $('.johari').find('.start')
-#    $cont.addClass '_visible'
-#    $cont.find('h3').addClass '_visible'
-#    setTimeout ->
-#      $cont.find('h4').addClass '_visible'
-#    , 1200
-#    setTimeout ->
-#      $cont.find('.circle').first().addClass '_visible'
-#    , 4000
-#    setTimeout ->
-#      $cont.find('.circle').first().next().addClass '_visible'
-#    , 8000
-#    setTimeout ->
-#      $cont.find('button').addClass '_visible'
-#    , 12000
-#    log 'johari intro initialized'
-    @johariStart()
+    $cont = $('.johari').find('.start')
+    $cont.addClass '_visible'
+    $cont.find('h3').addClass '_visible'
+    setTimeout ->
+      $cont.find('h4').addClass '_visible'
+    , 1200
+    setTimeout ->
+      $cont.find('.circle').first().addClass '_visible'
+    , 4000
+    setTimeout ->
+      $cont.find('.circle').first().next().addClass '_visible'
+    , 8000
+    setTimeout ->
+      $cont.find('button').addClass '_visible'
+    , 12000
+    log 'johari intro initialized'
+#    @johariStart()
 
   johariStart: ->
 

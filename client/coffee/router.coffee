@@ -76,52 +76,22 @@ Router.map ->
 #          UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
   }
 
-#  @route 'registration/test', {
-#    layoutTemplate: 'registration'
-##    waitOn: ->
-##      Meteor.subscribe('users')
-#    data: ->
-#      if Meteor.user()
-#        step = Meteor.user().profile.registration.step
-#        {
-#          id: step
-#          size: _.keys(Meteor.i18nMessages.registration.questions).length
-#          question: __('registration.questions.' + step)
-#          low: __('registration.questions.grades.low')
-#          semilow: __('registration.questions.grades.semilow')
-#          mid: __('registration.questions.grades.mid')
-#          semihigh: __('registration.questions.grades.semihigh')
-#          high: __('registration.questions.grades.high')
-#        }
-#    action: ->
-#      if !Meteor.user()
-#        @redirect 'base'
-#      else
-#        $('.reg-step').find('>div').removeClass '_active'
-#        $('.reg-step').find('>div').eq(1).addClass '_active'
-#        marginTop = 0 - $(window).height()
-#        $('.registration').find('.info').css('margin-top', marginTop + 'px')
-#        UI.insert UI.render(Template.testing_cont), $('#testing-insert').get(0)
-#  }
-#
-#  @route 'registration/finish', {
-#    template: 'testFinish'
-#    layoutTemplate: 'registration'
-#  }
-
 
 
   @route 'profile', {
     path: '/:username'
     layoutTemplate: 'mainLayout'
     template: 'profile'
-    waitOn: Meteor.user()
+    waitOn: ->
+      Meteor.subscribe('users')
     data: ->
       if Meteor.user()
         user = Meteor.users.findOne({'profile.username': @params.username})
         profile = user.profile
+        id = user._id
         {
           profile: profile
+          userId: id
         }
     onBeforeAction: ->
       if !Meteor.user()
@@ -129,3 +99,31 @@ Router.map ->
       else
         @render()
   }
+
+  @route 'johari', {
+
+    path: 'johari/:id'
+    template: 'johariAside'
+
+    waitOn: ->
+      Meteor.subscribe('users')
+
+    data: ->
+      id = @params.id
+      user = Meteor.users.findOne @params.id
+      {
+        name: user.profile.firstName
+        id: id
+      }
+
+    action: ->
+      if Meteor.user()
+        id = Meteor.user()._id
+        if @params.id is id
+          @redirect "johariYours"
+      else
+        @render()
+
+  }
+
+  @route 'johariYours'

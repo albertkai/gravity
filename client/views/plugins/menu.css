@@ -3,6 +3,17 @@ html, body, .perspective {
     height: 100%;
 }
 
+/*Fixture*/
+.perspective .outer-nav{
+    visibility: hidden;
+}
+
+.perspective.modalview .outer-nav{
+    visibility: visible;
+}
+
+/*Fixture end*/
+
 .perspective {
     background: #aaa;
     position: relative;
@@ -63,8 +74,8 @@ html, body, .perspective {
 .animate .main-wrap::after {
     opacity: 1;
     height: 101%;
-    -webkit-transition: opacity 0.3s;
-    transition: opacity 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
 }
 
 /* Outer Nav */
@@ -92,7 +103,7 @@ html, body, .perspective {
 }
 
 .outer-nav.left {
-    left: 25%;
+    left: 16%;
 }
 
 .outer-nav.right {
@@ -113,8 +124,8 @@ html, body, .perspective {
     font-weight: 300;
     margin: 0 0 30px 0;
     color: #fff;
-    -webkit-transition: color 0.3s;
-    transition: color 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
@@ -164,8 +175,8 @@ html, body, .perspective {
 }
 
 .effect-airbnb .main-wrap {
-    -webkit-transition: -webkit-transform 0.4s;
-    transition: transform 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
 }
@@ -229,8 +240,8 @@ html, body, .perspective {
 }
 
 .effect-moveleft .main-wrap {
-    -webkit-transition: -webkit-transform 0.4s;
-    transition: transform 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
 }
@@ -240,8 +251,8 @@ html, body, .perspective {
 }
 
 .effect-moveleft.animate .main-wrap {
-    -webkit-transform: translateZ(50px) translateX(50%) rotateY(-45deg);
-    transform: translateZ(50px) translateX(50%) rotateY(-45deg);
+    -webkit-transform: translateZ(-19px) translateX(30%) rotateY(-39deg);
+    transform: translateZ(-19px) translateX(30%) rotateY(-39deg);
 }
 
 .no-csstransforms3d .effect-moveleft.animate .main-wrap {
@@ -253,8 +264,8 @@ html, body, .perspective {
     opacity: 0;
     -webkit-transform: translateX(-100px) translateZ(1000px);
     transform: translateX(-100px) translateZ(1000px);
-    -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
-    transition: transform 0.4s, opacity 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
 }
 
 .effect-moveleft .outer-nav a:hover {

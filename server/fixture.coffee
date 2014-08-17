@@ -3,17 +3,19 @@
 #    id = user._id
 #    Meteor.users.remove id
 
-
-#  user = Accounts.createUser {
-#    username: 'albertkai'
-#    email: 'albertkai@me.com'
-#    password: '56114144as'
-#    profile: {
-#      name: 'Альберт',
-#      surname: 'Кайгородов'
-#      city: 'Saint-Petersburg',
-#      country: 'Russia'
-#    }
+#Meteor.users.update "esLjvkvo7uCgGzATQ", {$set: {'profile.registration.status': 'johari'}}
+##Meteor.users.update "esLjvkvo7uCgGzATQ", {$set: {'profile.registration.step': 60}}
+#
+#user = Accounts.createUser {
+#  username: 'albertkai',
+#  email: 'albertkai@me.com',
+#  password: '56114144as',
+#  profile: {
+#    name: 'Альберт',
+#    surname: 'Кайгородов'
+#    city: 'Saint-Petersburg',
+#    country: 'Russia'
 #  }
+#}
 
-#  Roles.addUsersToRoles(user, ['user'])
+#Roles.addUsersToRoles(user, ['user'])

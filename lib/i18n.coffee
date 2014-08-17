@@ -16,6 +16,496 @@ Meteor.i18nMessages.profile = {
       en:
         US: 'compatibility'
       ru: 'совместимось'
+
+  bigFive:
+
+    extra:
+      en:
+        US: 'extraversion'
+      ru: 'экстраверсия'
+
+    intra:
+      en:
+        US: 'intraversion'
+      ru: 'интраверсия'
+
+    affection:
+      en:
+        US: 'affection'
+      ru: 'аффективность'
+
+    selfControl:
+      en:
+        US: 'self-control'
+      ru: 'самоконтроль'
+
+    stability:
+      en:
+        US: 'stability'
+      ru: 'стабильность'
+
+    expression:
+      en:
+        US: 'stability'
+      ru: 'стабильность'
+
+    activity:
+      en:
+        US: 'activity'
+      ru: 'активность'
+
+    domination:
+      en:
+        US: 'domination'
+      ru: 'доминантность'
+
+    comunicability:
+      en:
+        US: 'comunicability'
+      ru: 'комуникабельность'
+
+    searchImpressions:
+      en:
+        US: 'searching for impressions'
+      ru: 'в поисках новых ощущений'
+
+    guilt:
+      en:
+        US: 'guilt'
+      ru: 'чувство вины'
+
+    warm:
+      en:
+        US: 'warm'
+      ru: 'теплота'
+
+    cooperation:
+      en:
+        US: 'cooperation'
+      ru: 'кооперативность'
+
+    trust:
+      en:
+        US: 'trust'
+      ru: 'доверчивость'
+
+    understanding:
+      en:
+        US: 'understanding'
+      ru: 'понимание'
+
+    respect:
+      en:
+        US: 'respect'
+      ru: 'уважительность'
+
+    accuracy:
+      en:
+        US: 'accuracy'
+      ru: 'аккуратность'
+
+    persistence:
+      en:
+        US: 'persistence'
+      ru: 'постоянство'
+
+    responsibility:
+      en:
+        US: 'responsibility'
+      ru: 'ответственность'
+
+    selfControl:
+      en:
+        US: 'self-сontrol'
+      ru: 'самоконтроль'
+
+    precaution:
+      en:
+        US: 'precaution'
+      ru: 'предосторожность'
+
+    anxiety:
+      en:
+        US: 'anxiety'
+      ru: 'раздражительность'
+
+    tension:
+      en:
+        US: 'tension'
+      ru: 'напряженность'
+
+    depression:
+      en:
+        US: 'depression'
+      ru: 'депрессивность'
+
+    selfCritisize:
+      en:
+        US: 'self-critisize'
+      ru: 'самокритика'
+
+    emotionLability:
+      en:
+        US: 'emotion lability'
+      ru: 'эмоциональная устойчивость'
+
+    contemporary:
+      en:
+        US: 'contemporary'
+      ru: 'современность'
+
+    curiosity:
+      en:
+        US: 'curiosity'
+      ru: 'любопытство'
+
+    artistic:
+      en:
+        US: 'artistic'
+      ru: 'артистизм'
+
+    sensitivity:
+      en:
+        US: 'sensitivity'
+      ru: 'чувствительность'
+
+    plasticity:
+      en:
+        US: 'plasticity'
+      ru: 'пластичность'
+}
+
+
+Meteor.i18nMessages.johari = {
+
+  male:
+    'dignified':
+      en: 'dignified'
+      ru: 'величиственный'
+    'powerful':
+      en: 'powerful'
+      ru: 'властный'
+    'observant':
+      en: 'observant'
+      ru: 'внимательный'
+    'mature':
+      en: 'mature'
+      ru: 'опытный'
+    'proud':
+      en: 'proud'
+      ru: 'гордый'
+    'kind':
+      en: 'kind'
+      ru: 'добрый'
+    'friendly':
+      en: 'friendly'
+      ru: 'дружелюбный'
+    'caring':
+      en: 'caring'
+      ru: 'заботливый'
+    'dependable':
+      en: 'dependable'
+      ru: 'зависимый'
+    'reflective':
+      en: 'reflective'
+      ru: 'задумчивый'
+    'selfConscious':
+      en: 'selfConscious'
+      ru: 'застенчивый'
+    'sensible':
+      en: 'sensible'
+      ru: 'здравомыслящий'
+    'knowledgeable':
+      en: 'knowledgeable'
+      ru: 'эрудированный'
+    'idealistic':
+      en: 'idealistic'
+      ru: 'идеалистический'
+    'ingenious':
+      en: 'ingenious'
+      ru: 'изобретательный'
+    'introverted':
+      en: 'introverted'
+      ru: 'интравертный'
+    'searching':
+      en: 'searching'
+      ru: 'в поиске нового'
+    'loving':
+      en: 'loving'
+      ru: 'любвеобильный'
+    'dreamy':
+      en: 'dreamy'
+      ru: 'мечтательный'
+    'wise':
+      en: 'wise'
+      ru: 'мудрый'
+    'trustworthy':
+      en: 'trustworthy'
+      ru: 'надежный'
+    'selfAssertive':
+      en: 'self-assertive'
+      ru: 'напористый'
+    'tense':
+      en: 'tense'
+      ru: 'напряженный'
+    'independent':
+      en: 'independent'
+      ru: 'самостоятельный'
+    'nervous':
+      en: 'nervous'
+      ru: 'нервный'
+    'shy':
+      en: 'shy'
+      ru: 'осторожный'
+    'witty':
+      en: 'witty'
+      ru: 'остроумный'
+    'brave':
+      en: 'brave'
+      ru: 'отважный'
+    'responsive':
+      en: 'responsive'
+      ru: 'отзывчивый'
+    'helpful':
+      en: 'helpful'
+      ru: 'готовый помочь'
+    'warm':
+      en: 'warm'
+      ru: 'сердечный'
+    'loyal':
+      en: 'loyal'
+      ru: 'преданный'
+    'adaptable':
+      en: 'adaptable'
+      ru: 'приспособляющийся'
+    'cheerful':
+      en: 'cheerful'
+      ru: 'радостный'
+    'relaxed':
+      en: 'relaxed'
+      ru: 'расслабленный'
+    'logical':
+      en: 'logical'
+      ru: 'рациональный'
+    'religious':
+      en: 'religious'
+      ru: 'религиозный'
+    'modest':
+      en: 'modest'
+      ru: 'скромный'
+    'complex':
+      en: 'complex'
+      ru: 'сложный'
+    'organized':
+      en: 'organized'
+      ru: 'собранный'
+    'sympathetic':
+      en: 'sympathetic'
+      ru: 'сочувственный'
+    'patient':
+      en: 'patient'
+      ru: 'спокойный'
+    'spontaneous':
+      en: 'spontaneous'
+      ru: 'спонтанный'
+    'happy':
+      en: 'happy'
+      ru: 'счастливый'
+    'talanted':
+      en: 'talanted'
+      ru: 'талантливый'
+    'calm':
+      en: 'calm'
+      ru: 'тихий'
+    'confident':
+      en: 'confident'
+      ru: 'уверенный'
+    'clever':
+      en: 'clever'
+      ru: 'умный'
+    'able':
+      en: 'able'
+      ru: 'умелый'
+    'bold':
+      en: 'bold'
+      ru: 'отважный'
+    'sensible':
+      en: 'sensible'
+      ru: 'чувствительный'
+    'independent':
+      en: 'independent'
+      ru: 'самостоятельный'
+    'extroverted':
+      en: 'extroverted'
+      ru: 'экстравертный'
+    'energetic':
+      en: 'energetic'
+      ru: 'энергичный'
+
+  female:
+    'dignified':
+      en: 'dignified'
+      ru: 'величиственная'
+    'powerful':
+      en: 'powerful'
+      ru: 'властная'
+    'observant':
+      en: 'observant'
+      ru: 'внимательная'
+    'mature':
+      en: 'mature'
+      ru: 'опытная'
+    'proud':
+      en: 'proud'
+      ru: 'гордая'
+    'kind':
+      en: 'kind'
+      ru: 'добрая'
+    'friendly':
+      en: 'friendly'
+      ru: 'дружелюбная'
+    'caring':
+      en: 'caring'
+      ru: 'заботливая'
+    'dependable':
+      en: 'dependable'
+      ru: 'зависимая'
+    'reflective':
+      en: 'reflective'
+      ru: 'задумчивая'
+    'selfConscious':
+      en: 'selfConscious'
+      ru: 'застенчивая'
+    'sensible':
+      en: 'sensible'
+      ru: 'здравомыслящая'
+    'knowledgeable':
+      en: 'knowledgeable'
+      ru: 'эрудированная'
+    'idealistic':
+      en: 'idealistic'
+      ru: 'идеалистическая'
+    'ingenious':
+      en: 'ingenious'
+      ru: 'изобретательная'
+    'introverted':
+      en: 'introverted'
+      ru: 'интравертная'
+    'searching':
+      en: 'searching'
+      ru: 'в поиске нового'
+    'loving':
+      en: 'loving'
+      ru: 'любвеобильный'
+    'dreamy':
+      en: 'dreamy'
+      ru: 'мечтательная'
+    'wise':
+      en: 'wise'
+      ru: 'мудрая'
+    'trustworthy':
+      en: 'trustworthy'
+      ru: 'надежная'
+    'selfAssertive':
+      en: 'self-assertive'
+      ru: 'напористая'
+    'tense':
+      en: 'tense'
+      ru: 'напряженная'
+    'independent':
+      en: 'independent'
+      ru: 'самостоятельная'
+    'nervous':
+      en: 'nervous'
+      ru: 'нервная'
+    'shy':
+      en: 'shy'
+      ru: 'осторожная'
+    'witty':
+      en: 'witty'
+      ru: 'остроумная'
+    'brave':
+      en: 'brave'
+      ru: 'отважная'
+    'responsive':
+      en: 'responsive'
+      ru: 'отзывчивая'
+    'helpful':
+      en: 'helpful'
+      ru: 'готовая помочь'
+    'warm':
+      en: 'warm'
+      ru: 'сердечная'
+    'loyal':
+      en: 'loyal'
+      ru: 'преданная'
+    'adaptable':
+      en: 'adaptable'
+      ru: 'приспособляющаяся'
+    'cheerful':
+      en: 'cheerful'
+      ru: 'радостная'
+    'relaxed':
+      en: 'relaxed'
+      ru: 'расслабленная'
+    'logical':
+      en: 'logical'
+      ru: 'рациональная'
+    'religious':
+      en: 'religious'
+      ru: 'религиозная'
+    'modest':
+      en: 'modest'
+      ru: 'скромная'
+    'complex':
+      en: 'complex'
+      ru: 'сложная'
+    'organized':
+      en: 'organized'
+      ru: 'собранная'
+    'sympathetic':
+      en: 'sympathetic'
+      ru: 'сочувственная'
+    'patient':
+      en: 'patient'
+      ru: 'спокойная'
+    'spontaneous':
+      en: 'spontaneous'
+      ru: 'спонтанная'
+    'happy':
+      en: 'happy'
+      ru: 'счастливая'
+    'talanted':
+      en: 'talanted'
+      ru: 'талантливая'
+    'calm':
+      en: 'calm'
+      ru: 'тихий'
+    'confident':
+      en: 'confident'
+      ru: 'уверенная'
+    'clever':
+      en: 'clever'
+      ru: 'умная'
+    'able':
+      en: 'able'
+      ru: 'умелая'
+    'bold':
+      en: 'bold'
+      ru: 'отважная'
+    'sensible':
+      en: 'sensible'
+      ru: 'чувствительная'
+    'independent':
+      en: 'independent'
+      ru: 'самостоятельная'
+    'extroverted':
+      en: 'extroverted'
+      ru: 'экстравертная'
+    'energetic':
+      en: 'energetic'
+      ru: 'энергичная'
+
 }
 
 

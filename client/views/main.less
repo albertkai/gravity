@@ -6,6 +6,7 @@
 @gray-light: #999;
 @red: #ff7b7b;
 @blue: #00c0ff;
+@blue-green: #24ff9c;
 @blue-light: #b6eeff;
 @green: #3cff00;
 
@@ -160,6 +161,30 @@ label.error{
 
 }
 
+#go-up{
+  width: 50px;
+  height: 100%;
+  position: fixed;
+  z-index: 100;
+  background: rgba(255,255, 255, .6);
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
+  font-size: 33px;
+  font-weight: 200;
+  color: #999;
+  .transition(4s);
+  visibility: hidden;
+  opacity: 0;
+  &._visible{
+    opacity: 1;
+    visibility: visible;
+  }
+  &:hover{
+    background: rgba(255,255, 255, .8);
+  }
+}
+
 
 //Utils
 
@@ -179,3 +204,4 @@ label.error{
 @import 'registration/registration.lessimport';
 @import 'profile/profile.lessimport';
 @import 'landing/hello.lessimport';
+@import 'johari/johari.lessimport';

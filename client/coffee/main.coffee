@@ -44,6 +44,7 @@ Template.mainLayout.rendered = ->
 UI.body.events {
   'click body': ->
     log 'yo'
+
 }
 
 UI.body.cloudfrontUrl = 'http://d1jfn2lab933y3.cloudfront.net/'

@@ -83,6 +83,7 @@
           z-index: 2;
           top: 0;
           left: 0;
+          color: white;
           .rounded(100px);
           .scale(0);
           opacity: 0;
@@ -105,6 +106,8 @@
           display: inline-block;
           margin-right: 20px;
           cursor: pointer;
+          -webkit-perspective: 1000;
+          -webkit-backface-visibility: hidden;
           button{
             width: 60px;
             height: 60px;
@@ -381,11 +384,12 @@
                           top: 5px;
                           .rounded(300px);
                           .traits{
-                            width: 260px;
-                            height: 260px;
-                            left: 30px;
+                            width: 250px;
+                            height: 250px;
+                            left: 35px;
                             position: relative;
-                            top: 30px;
+                            top: 35px;
+                            color: white;
                           }
                         }
                         &:nth-child(1){

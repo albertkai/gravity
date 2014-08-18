@@ -37,15 +37,17 @@ Template.mainLayout.rendered = ->
   MainCtrl['loader'].setDensity(66)
   MainCtrl['loader'].setRange(1)
   MainCtrl['loader'].setFPS(51)
-  console.log 'thid is main ctrl'
-  console.log MainCtrl
+  $(window).scroll ->
+    if $('body').scrollTop() > 900 and !$('#go-up').hasClass('_visible')
+      $('#go-up').addClass '_visible'
+    else if $('body').scrollTop() < 900 and $('#go-up').hasClass('_visible')
+      $('#go-up').removeClass '_visible'
 
-
-UI.body.events {
-  'click body': ->
-    log 'yo'
-
+Template.mainLayout.events {
+  'click #go-up': ->
+    $.scrollTo '0px', 600
 }
+
 
 UI.body.cloudfrontUrl = 'http://d1jfn2lab933y3.cloudfront.net/'
 

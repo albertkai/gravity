@@ -32,22 +32,42 @@ Meteor.i18nMessages.profile = {
     affection:
       en:
         US: 'affection'
-      ru: 'аффективность'
+      ru: 'привязанность'
+
+    detachedness:
+      en:
+        US: 'detachedness'
+      ru: 'обособленность'
 
     selfControl:
       en:
         US: 'self-control'
       ru: 'самоконтроль'
 
+    impulsiveness:
+      en:
+        US: 'impulsiveness'
+      ru: 'импульсивность'
+
     stability:
       en:
-        US: 'stability'
-      ru: 'стабильность'
+        US: 'calm'
+      ru: 'спокойствие'
+
+    neuroticism:
+      en:
+        US: 'neuroticism'
+      ru: 'невротичность'
 
     expression:
       en:
-        US: 'stability'
-      ru: 'стабильность'
+        US: 'expression'
+      ru: 'экспрессивность'
+
+    pragmatism:
+      en:
+        US: 'pragmatism'
+      ru: 'прагматичность'
 
     activity:
       en:
@@ -59,7 +79,7 @@ Meteor.i18nMessages.profile = {
         US: 'domination'
       ru: 'доминантность'
 
-    comunicability:
+    communicability:
       en:
         US: 'comunicability'
       ru: 'комуникабельность'

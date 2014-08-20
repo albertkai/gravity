@@ -31,6 +31,9 @@ Accounts.ui.config {
 
 #Init loader
 Template.mainLayout.rendered = ->
+
+  log 'Main layout rendering'
+
   MainCtrl['loader'] = new CanvasLoader('main-loader')
   MainCtrl['loader'].setColor('#ffffff')
   MainCtrl['loader'].setDiameter(56)
@@ -43,9 +46,48 @@ Template.mainLayout.rendered = ->
     else if $('body').scrollTop() < 900 and $('#go-up').hasClass('_visible')
       $('#go-up').removeClass '_visible'
 
+
 Template.mainLayout.events {
+
   'click #go-up': ->
     $.scrollTo '0px', 600
+
+  'click .menu-toggle': (e)->
+
+    e.preventDefault()
+    if $('.main-wrap').hasClass '_menu-opened'
+      $('.main-wrap').removeClass '_menu-opened'
+      $('.main-wrap').removeClass '_notifications-opened'
+      utils.enableScroll()
+    else
+      $('.main-wrap').removeClass '_notifications-opened'
+      $('.main-wrap').addClass '_menu-opened'
+      utils.disableScroll()
+
+  'click .notifications-toggle': (e)->
+
+    e.preventDefault()
+    if $('.main-wrap').hasClass '_notifications-opened'
+      $('.main-wrap').removeClass '_menu-opened'
+      $('.main-wrap').removeClass '_notifications-opened'
+      utils.enableScroll()
+    else
+      $('.main-wrap').addClass '_notifications-opened'
+      $('.main-wrap').removeClass '_menu-opened'
+      utils.disableScroll()
+
+  'click .logout': (e)->
+
+    e.preventDefault()
+    MainCtrl.logout()
+
+  'click .main-wrap._menu-opened, click .main-wrap._notifications-opened': ->
+
+    $('.main-wrap').removeClass '_menu-opened'
+    $('.main-wrap').removeClass '_notifications-opened'
+    utils.enableScroll()
+
+
 }
 
 

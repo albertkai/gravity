@@ -13,6 +13,15 @@ if Meteor.isClient
         @loader.hide()
       , 500
 
+    logout: ->
+
+      Meteor.logout ->
+
+        Session.set('usersLoaded', false)
+        Session.set('regInitialized', false)
+        MainCtrl.notify 'До встречи!', 'Ждем вас снова!:)'
+        Router.go '/'
+
     notify: (title, text, type, icon)->
 
       notifyObject = do ->

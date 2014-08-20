@@ -45,27 +45,13 @@ Template.profileMainInfo.events {
 
 }
 
-
-
 Template.profile.rendered = ->
 
   log 'Profile template rendered!'
-  $('body').sexyMenu()
   $('.top').attr('data-stellar-background-ratio', .6)
-  log 'heeey'
-  log @data
   $.stellar()
-  words = [
-    {text: 'веселый', weight: 22},
-    {text: 'добрый', weight: 21},
-    {text: 'отзывчивый', weight: 20},
-    {text: 'творческий', weight: 19},
-    {text: 'артистичный', weight: 18},
-    {text: 'флегматичный', weight: 17},
-    {text: 'новаторский', weight: 16},
-    {text: 'непосредственный', weight: 15}
-  ]
-  $("#tag-cloud").jQCloud(words)
+  id = $('#userId').val()
+  profileCtrl.buildPersonalityClouds(Meteor.users.findOne(id))
   date = {}
   date['year'] = 1989
   date['month'] = 1
@@ -80,7 +66,7 @@ Template.profile.rendered = ->
     else
       console.log data
       profileCtrl.buildCosmogram(data)
-  profileCtrl.buildJohari()
+  profileCtrl.buildJohari(Meteor.user().profile.tests.johari)
 
 
 Template.johariOutput.rendered = ->
@@ -100,10 +86,13 @@ Template.bigFiveOutput.rendered = ->
 
   buildCosmogram: (data)->
 
-    paper = new Raphael('cosmogramm', 350, 350)
+    paper = new Raphael('cosmogramm', 690, 350)
+
     paper.circle(170, 170, 150).attr({"stroke-width": 0, stroke: '#00ff00', "fill": "225-#9595ff-#8ef1fc", "fill-opacity": 1})
     paper.circle(170, 170, 117).attr({"stroke-width": 0, stroke: '#00ff00', "fill": "#ffffff", "fill-opacity": 1})
     paper.circle(170, 170, 100).attr({"stroke-width": 1, stroke: '#8ef1fc', "opacity": .7})
+    for i in [0..360] by 30
+      paper.path("M170 170l0 150").attr({"stroke": "white", "stroke-width": 1, transform: "r" + i + " 170 170", "stroke-opacity": .6})
 
     paper.circle(170, 71, 14).attr({fill: "#00ff00", "stroke-width": 0, transform: "r" + (- data.sun.longitude - 90) +  " 170 170", "fill-opacity": 1})
     paper.circle(170, 71, 14).attr({fill: "#64ffc6", "stroke-width": 0, transform: "r" + (- data.moon.longitude - 90) +  " 170 170", "fill-opacity": 1})
@@ -133,8 +122,15 @@ Template.bigFiveOutput.rendered = ->
     leo.attr({stroke: 'white', fill: 'white', 'stroke-width': 0, transform: 'S.45T197, 80'})
     capricorn.attr({stroke: 'white', fill: 'white', 'stroke-width': 0, transform: 'S.45T-18, -250'})
     pisces.attr({stroke: 'white', fill: 'white', 'stroke-width': 0, transform: 'S.45T-292, -155'})
-    for i in [0..360] by 30
-      paper.path("M170 170l0 150").attr({"stroke": "white", "stroke-width": 1, transform: "r" + i + " 170 170", "stroke-opacity": .6})
+
+    #Building pie charts
+
+    values = [10, 25, 55, 10]
+    labels = ['огонь', 'вода', 'воздух', 'земля']
+
+    paper.pieChart(420, 250, 73, values, labels, "#fff")
+    paper.pieChart(590, 250, 73, values, labels, "#fff")
+
 
 
   buildBigFive: (data)->
@@ -324,24 +320,25 @@ Template.bigFiveOutput.rendered = ->
 
   buildJohari: (data)->
 
-    open = [
-      {text: 'веселый', weight: 24},
-      {text: 'добрый', weight: 18},
-      {text: 'отзывчивый', weight: 14},
-      {text: 'экстаординарный', weight: 8},
-      {text: 'сексуальный', weight: 10}
-    ]
-    blind = [
-      {text: 'умный', weight: 22},
-      {text: 'интересный', weight: 21},
-      {text: 'лояльный', weight: 20},
-    ]
-    hidden = [
-      {text: 'отважный', weight: 22},
-      {text: 'стабильный', weight: 20},
-      {text: 'интересный', weight: 19},
-    ]
-    unknown = ['интровертный, энергичный, добрый, отзывчивый, знаменательный, смелый, дружелюьный, достойный, автократичный, упрямый, религиозный, спонтанный, новаторский, традиционный']
+
+    traits = {}
+    traits['open'] = []
+    traits['hidden'] = []
+    traits['blind'] = []
+    traits['unknown'] = []
+
+    for window, answers of data.window
+      if window isnt 'unknown'
+        arr = []
+        for trait, q of answers
+          obj = {}
+          obj['text'] = __('johari.male.' + trait)
+          obj['weight'] = q * 10
+          arr.push obj
+        traits[window] = arr
+
+    log 'traits:'
+    log traits
 
     settings = {
 #      "size" : {
@@ -361,12 +358,13 @@ Template.bigFiveOutput.rendered = ->
     openHtml = ''
     blindHtml = ''
     hiddenHtml = ''
-    open.forEach (o)->
+    traits.open.forEach (o)->
       openHtml += '<span data-weight="' + o.weight + '">' + o.text + '</span>'
-    blind.forEach (o)->
+    traits.blind.forEach (o)->
       blindHtml += '<span data-weight="' + o.weight + '">' + o.text + '</span>'
-    hidden.forEach (o)->
-      hiddenHtml += '<span data-weight="' + o.weight + '">' + o.text + '</span>'
+    traits.hidden.forEach (o)->
+      hiddenHtml += '<span data-weight="' + o.weight * 2 + '">' + o.text + '</span>'
+      hiddenHtml += '<span data-weight="' + o.weight * 1 + '">' + o.text + '</span>'
     $('#open-sector').html(openHtml)
     $('#blind-sector').html(blindHtml)
     $('#hidden-sector').html(hiddenHtml)
@@ -375,10 +373,36 @@ Template.bigFiveOutput.rendered = ->
     $('#hidden-sector').awesomeCloud settings
 
     unknownMarkup = ''
-    for trait in unknown
-      unknownMarkup += trait + ', '
+    for trait, q of data.window.unknown
+      html = '<span>' + __('johari.male.' + trait) + '</span>, '
+      unknownMarkup += html
 
     $('#unknown-sector').html unknownMarkup
+
+  buildPersonalityClouds: (user)->
+
+    johari = user.profile.tests.johari.window
+    words = []
+    for name, val of johari.open
+      words.push {
+        text: __('johari.male.' + name)
+        weight: val * 9
+      }
+    for name, val of johari.blind
+      words.push {
+        text: __('johari.male.' + name)
+        weight: val * 5
+      }
+    for name, val of johari.hidden
+      words.push {
+        text: __('johari.male.' + name)
+        weight: val * 2
+      }
+    $("#tag-cloud").jQCloud words, {
+      afterCloudRender: ->
+        $('#tag-cloud').addClass '_rendered'
+    }
+
 
 
   getDesc: (data)->

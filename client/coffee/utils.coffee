@@ -11,6 +11,19 @@
     callback()
     MainCtrl.hideLoader()
 
+  disableScroll: ->
+
+    log 'scroll disabled'
+    $('.main-wrap').on 'mousewheel', (e)->
+      if (e.target.id == 'el') then return
+      e.preventDefault()
+      e.stopPropagation()
+
+  enableScroll: ->
+
+    log 'scroll enabled'
+    $('.main-wrap').off 'mousewheel'
+
 }
 
 

@@ -1,32 +1,32 @@
 Template.johariAside.rendered = ->
-#  $cont = $(@.find('.johari-start'))
-#  $cont.addClass '_visible'
-#  setTimeout ->
-#    $cont.find('h3').addClass '_visible'
-#  , 100
-#  setTimeout ->
-#    $cont.find('h4').addClass '_visible'
-#  , 1200
-#  setTimeout ->
-#    $cont.find('.circle').first().addClass '_visible'
-#  , 4000
-#  setTimeout ->
-#    $cont.find('.circle').first().next().addClass '_visible'
-#  , 8000
-#  setTimeout ->
-#    $cont.find('button').addClass '_visible'
-#  , 12000
-#  log 'johari intro initialized'
-  $cont = $('.johari-aside').find('.johari-start')
-  $cont.find('*').removeClass '_visible'
+  $cont = $(@.find('.johari-start'))
+  $cont.addClass '_visible'
   setTimeout ->
-    $cont.removeClass '_visible'
-    UI.insert UI.render(Template.johariAsideContent), $('.johari-insert').get(0)
-    setTimeout ->
-      $cont = $('#johari-container')
-      $cont.removeClass('flip').addClass '_ready'
-    , 400
-  , 1000
+    $cont.find('h3').addClass '_visible'
+  , 100
+  setTimeout ->
+    $cont.find('h4').addClass '_visible'
+  , 1200
+  setTimeout ->
+    $cont.find('.circle').first().addClass '_visible'
+  , 4000
+  setTimeout ->
+    $cont.find('.circle').first().next().addClass '_visible'
+  , 8000
+  setTimeout ->
+    $cont.find('button').addClass '_visible'
+  , 12000
+  log 'johari intro initialized'
+#  $cont = $('.johari-aside').find('.johari-start')
+#  $cont.find('*').removeClass '_visible'
+#  setTimeout ->
+#    $cont.removeClass '_visible'
+#    UI.insert UI.render(Template.johariAsideContent), $('.johari-insert').get(0)
+#    setTimeout ->
+#      $cont = $('#johari-container')
+#      $cont.removeClass('flip').addClass '_ready'
+#    , 400
+#  , 1000
 
 
 

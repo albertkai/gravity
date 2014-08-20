@@ -86,12 +86,7 @@ Template.registration.events {
 
     e.preventDefault()
 
-    Meteor.logout ->
-
-      Session.set('usersLoaded', false)
-      Session.set('regInitialized', false)
-      MainCtrl.notify 'До встречи!', 'Ждем вас снова!:)'
-      Router.go '/'
+    MainCtrl.logout()
 }
 
 

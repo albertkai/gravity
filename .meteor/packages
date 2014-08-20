@@ -10,7 +10,6 @@ coffeescript
 npm
 i18n
 less
-stellar
 iron-router
 accounts-password
 accounts-facebook

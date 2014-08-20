@@ -16,6 +16,7 @@ Template.profileMainInfo.rendered = ->
   profileCtrl.tabs.init()
   profileCtrl.stickyMenu.init()
 
+
   $('.info-tabs').waypoint {
     context: '.main-wrap'
     handler: (dir)->
@@ -54,8 +55,15 @@ Template.profileMainInfo.events {
 Template.profile.rendered = ->
 
   log 'Profile template rendered!'
-  $('.top').attr('data-stellar-background-ratio', .6)
-  $.stellar()
+#  $('.top').attr('data-stellar-background-ratio', .6)
+#  $.stellar()
+  setInterval ->
+    index = .35
+    top = $('.main-wrap').scrollTop()
+    if top isnt prevTop and top < 1200
+      prevTop = top
+      $('.profile .top').css('background-position', '0 ' + (index * top) + 'px')
+  , 16
   id = $('#userId').val()
   profileCtrl.buildPersonalityClouds(Meteor.users.findOne(id))
   date = {}

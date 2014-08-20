@@ -35,7 +35,7 @@
       <file leaf-file-name="profile.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/profile/profile.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="13" selection-start="1205" selection-end="1205" vertical-scroll-proportion="-9.230769" vertical-offset="525" max-vertical-offset="7530">
+            <state line="48" column="46" selection-start="1134" selection-end="1134" vertical-scroll-proportion="-7.5" vertical-offset="525" max-vertical-offset="7620">
               <folding />
             </state>
           </provider>
@@ -79,19 +79,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="87" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.6965944" vertical-offset="420" max-vertical-offset="1425">
+            <state line="58" column="87" selection-start="1687" selection-end="1687" vertical-scroll-proportion="-18.75" vertical-offset="420" max-vertical-offset="1425">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.coffee" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/coffee/main.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="33" selection-start="634" selection-end="634" vertical-scroll-proportion="-9.846154" vertical-offset="224" max-vertical-offset="1560">
+            <state line="52" column="39" selection-start="1244" selection-end="1244" vertical-scroll-proportion="0.57052296" vertical-offset="420" max-vertical-offset="1560">
               <folding />
             </state>
           </provider>
@@ -174,10 +174,10 @@
         <option value="$PROJECT_DIR$/lib/controllers.coffee" />
         <option value="$PROJECT_DIR$/client/coffee/utils.coffee" />
         <option value="$PROJECT_DIR$/client/views/main.less" />
-        <option value="$PROJECT_DIR$/client/coffee/main.coffee" />
         <option value="$PROJECT_DIR$/client/views/profile/profile.lessimport" />
-        <option value="$PROJECT_DIR$/client/views/profile/profile.coffee" />
         <option value="$PROJECT_DIR$/client/views/main.html" />
+        <option value="$PROJECT_DIR$/client/views/profile/profile.coffee" />
+        <option value="$PROJECT_DIR$/client/coffee/main.coffee" />
       </list>
     </option>
   </component>
@@ -310,6 +310,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gravity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gravity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="coffee" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -719,13 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/coffee/main.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="33" selection-start="634" selection-end="634" vertical-scroll-proportion="-9.846154" vertical-offset="224" max-vertical-offset="1560">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/registration/registration.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="88" column="21" selection-start="3122" selection-end="3122" vertical-scroll-proportion="-10.384615" vertical-offset="1050" max-vertical-offset="24195">
@@ -740,16 +751,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/profile/profile.coffee">
+    <entry file="file://$PROJECT_DIR$/client/views/main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="13" selection-start="1205" selection-end="1205" vertical-scroll-proportion="-9.230769" vertical-offset="525" max-vertical-offset="7530">
+        <state line="58" column="87" selection-start="1687" selection-end="1687" vertical-scroll-proportion="-18.75" vertical-offset="420" max-vertical-offset="1425">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/main.html">
+    <entry file="file://$PROJECT_DIR$/client/views/profile/profile.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="87" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.6965944" vertical-offset="420" max-vertical-offset="1425">
+        <state line="48" column="46" selection-start="1134" selection-end="1134" vertical-scroll-proportion="-7.5" vertical-offset="525" max-vertical-offset="7620">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/coffee/main.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="39" selection-start="1244" selection-end="1244" vertical-scroll-proportion="0.57052296" vertical-offset="420" max-vertical-offset="1560">
           <folding />
         </state>
       </provider>

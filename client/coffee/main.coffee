@@ -50,7 +50,7 @@ Template.mainLayout.rendered = ->
 Template.mainLayout.events {
 
   'click #go-up': ->
-    $.scrollTo '0px', 600
+    $('.main-wrap').scrollTo '0px', 600
 
   'click .menu-toggle': (e)->
 

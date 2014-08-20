@@ -16,16 +16,22 @@ Template.profileMainInfo.rendered = ->
   profileCtrl.tabs.init()
   profileCtrl.stickyMenu.init()
 
-  $('.info-tabs').waypoint (dir)->
-    if $('#personality').hasClass '_active'
-      if dir is 'up'
-        profileCtrl.stickyMenu.noStick()
-      else if dir is 'down'
-        profileCtrl.stickyMenu.stick()
+  $('.info-tabs').waypoint {
+    context: '.main-wrap'
+    handler: (dir)->
+      if $('#personality').hasClass '_active'
+        if dir is 'up'
+          profileCtrl.stickyMenu.noStick()
+        else if dir is 'down'
+          profileCtrl.stickyMenu.stick()
+  }
 
-  $('.context-nav.sticky ul li').waypoint ->
-    $('.context-nav.sticky ul li').removeClass '_active'
-    $(this).addClass '_active'
+  $('.context-nav.sticky ul li').waypoint {
+    context: '.main-wrap'
+    handler: ->
+      $('.context-nav.sticky ul li').removeClass '_active'
+      $(this).addClass '_active'
+  }
 
 
 Template.profileMainInfo.events {
@@ -41,7 +47,7 @@ Template.profileMainInfo.events {
   'click .context-nav.sticky ul li': (e)->
 
     target = $(e.currentTarget).data('target')
-    $.scrollTo $('#' + target), 800
+    $('.main-wrap').scrollTo $('#' + target), 800
 
 }
 

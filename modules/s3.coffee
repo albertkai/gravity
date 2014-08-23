@@ -14,10 +14,10 @@ if Meteor.isServer
         randomName + '.' + extention
 
       origImage =  {
-        Key: newName
+        Key: 'user_media/' + newName
         ContentType: pic.type
         Body: buffer
-        Bucket: 'palitra'
+        Bucket: 'microcosm'
       }
 
       f = new Future()
@@ -28,7 +28,7 @@ if Meteor.isServer
           f.return(false)
         else
           console.log 'object ' + pic.name + ' with new name ' + newName + ' uploaded to S3! Congrats!'
-          f.return(true)
+          f.return(newName)
 
       f.wait()
 
@@ -53,14 +53,14 @@ if Meteor.isServer
         Key: newName.orig
         ContentType: pics[0].fileInfo.type
         Body: origBuffer
-        Bucket: 'palitra'
+        Bucket: 'microcosm'
       }
 
       resizedImage =  {
         Key: newName.thumb
         ContentType: pics[0].fileInfo.type
         Body: resizedBuffer
-        Bucket: 'palitra'
+        Bucket: 'microcosm'
       }
 
       f = new Future()
@@ -94,8 +94,8 @@ if Meteor.isServer
       s3 = new AWS.S3()
 
       params = {
-        Bucket: 'palitra'
-        Key: pic
+        Bucket: 'microcosm'
+        Key: 'user_media/' + pic
       }
 
       f = new Future()
@@ -118,7 +118,7 @@ if Meteor.isServer
         s3 = new AWS.S3()
 
         params = {
-          Bucket: 'palitra',
+          Bucket: 'microcosm',
           Delete: {
             Objects: []
           }
@@ -146,5 +146,144 @@ if Meteor.isServer
         console.log 'no pics to delete'
 
         true
+
+  }
+
+if Meteor.isClient
+
+  @Media = {
+
+    uploadPic: (e, pic, file, callback)->
+
+      Meteor.call 'uploadPic', pic, (err, res)->
+        if err
+          MainCtrl.hideLoader()
+          MainCtrl.notify('Ошибка сервера, пожалуйста попробуйте позже!', 'error')
+        else
+          if res
+            callback(res)
+          else
+            MainCtrl.hideLoader()
+            MainCtrl.notify('Ошибка сервера, пожалуйста попробуйте позже!', 'error')
+
+    updatePic: (e, pic, file, currentPic, callback)->
+
+      Meteor.call 'deletePic', currentPic, (err, res)->
+
+        if err
+
+          MainCtrl.notify('Ошибка сервера, пожалуйста попробуйте позже!', 'error')
+
+        else
+
+          if res
+
+            Media.uploadPic(e, pic, file, callback)
+
+          else
+
+            MainCtrl.notify('Ошибка сервера, пожалуйста попробуйте позже!', 'error')
+
+    resizeAndUpload: (id, file, width, height)->
+
+      log 'triggered upload with resize'
+
+      pic = {}
+      resizedPic = {}
+
+      deferred = $.Deferred()
+
+      resize = ()->
+        reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onLoad = (e)->
+          $.canvasResize(file, {
+            width: width,
+            height: height,
+            crop: false,
+            quality: 80,
+            callback: (data)->
+              deferred.resolve(data)
+              console.log {data: data}
+          })
+        deferred.promise()
+
+
+      originalFile = ()->
+        reader = new FileReader()
+        deferred = $.Deferred()
+        reader.readAsBinaryString(file)
+        reader.onload = (e)->
+          ifile = reader.result
+          deferred.resolve(ifile)
+          console.log {reader: ifile}
+        deferred.promise()
+
+
+
+      $.when(originalFile(), resize()).done (ifile, resizedFile)=>
+        console.log 'resolved'
+        pic['fileInfo'] = file
+        pic['data'] = ifile
+        resizedPic['fileInfo'] = file
+        resizedPic['data'] = resizedFile
+        console.log pic
+        console.log resizedPic
+        Meteor.call 'uploadWithThumb', [pic, resizedPic], (err, res)->
+          if err
+
+            MainCtrl.notify('Ошибка сервера, пожалуйста попробуйте позже!', 'error')
+
+          else
+
+            if res
+
+              console.log res
+
+              Gallery.update id, {$push: {'images': res}}, ->
+
+                MainCtrl.notify 'Изображение ' + res + ' добавлено!', 'success'
+
+                MainCtrl.hideLoader()
+
+            else
+
+              MainCtrl.notify('Ошибка сервера, пожалуйста попробуйте позже!', 'error')
+
+    deletePic: (pic)->
+
+      Meteor.call 'deletePic', pic, (err, res)->
+
+        if err
+
+          MainCtrl.notify('Ошибка сервера, пожалуйста попробуйте позже!', 'error')
+
+        else
+
+          if res
+
+            MainCtrl.notify 'Изображение успешно удалено!', 'success'
+
+          else
+
+            MainCtrl.notify('Ошибка сервера, пожалуйста попробуйте позже!', 'error')
+
+    deletePics: (pics)->
+
+      Meteor.call 'deletePics', pics, (err, res)->
+
+        if err
+
+          MainCtrl.notify('Ошибка сервера, пожалуйста попробуйте позже!', 'error')
+
+        else
+
+          if res
+
+            MainCtrl.notify 'Изображения успешно удалено!', 'success'
+
+          else
+
+            MainCtrl.notify('Ошибка сервера, пожалуйста попробуйте позже!', 'error')
 
   }

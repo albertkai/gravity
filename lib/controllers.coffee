@@ -50,4 +50,19 @@ if Meteor.isClient
           }
 
       new PNotify notifyObject
+
+    modal: {
+
+      open: ->
+
+        $('.modal-page').addClass '_opened'
+        $('.modal-overlay').addClass '_visible'
+
+      close: ->
+
+        $('.modal-page').removeClass '_opened'
+        $('.modal-overlay').removeClass '_visible'
+
+    }
+
   }

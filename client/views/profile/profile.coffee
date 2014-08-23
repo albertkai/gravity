@@ -17,23 +17,81 @@ Template.profileMainInfo.rendered = ->
   profileCtrl.stickyMenu.init()
 
 
-  $('.info-tabs').waypoint {
-    context: '.main-wrap'
-    handler: (dir)->
-      if $('#personality').hasClass '_active'
-        if dir is 'up'
-          profileCtrl.stickyMenu.noStick()
-        else if dir is 'down'
-          profileCtrl.stickyMenu.stick()
-  }
+  setTimeout ->
+    $('.info-tabs').waypoint {
+      context: '.main-wrap'
+      handler: (dir)->
+        if $('#personality').hasClass '_active'
+          if dir is 'up'
+            profileCtrl.stickyMenu.noStick()
+          else if dir is 'down'
+            profileCtrl.stickyMenu.stick()
+    }
 
-  $('.context-nav.sticky ul li').waypoint {
-    context: '.main-wrap'
-    handler: ->
-      $('.context-nav.sticky ul li').removeClass '_active'
-      $(this).addClass '_active'
-  }
+    $('.context-nav.sticky ul li').waypoint {
+      context: '.main-wrap'
+      handler: ->
+        $('.context-nav.sticky ul li').removeClass '_active'
+        $(this).addClass '_active'
+    }
+  , 1500
 
+
+Template.profileTop.helpers {
+
+  profile: ->
+    Meteor.users.findOne({'profile.username': Session.get('currentUsersPage')}).profile
+
+}
+
+Template.profileTop.events {
+
+  'change #changeBackground': (e)->
+
+    log 'triggered change'
+    input = $(e.target)
+    file = input.get(0).files[0]
+    id = $('#albumId').val()
+    fr = new FileReader()
+    MainCtrl.showLoader()
+    fr.onload = ->
+      pic = {}
+      pic['data'] = fr.result
+      pic['name'] = file.name
+      pic['size'] = file.size
+      pic['type'] = file.type
+
+      path = $('.profile').find('.top').css('background-image')
+      currentPicName = _.last(path.split('/')).replace(')', '')
+
+      if currentPicName.match /sample/
+        log 'changing default image to users one...'
+        Media.uploadPic e, pic, file, (pic)->
+          log 'picture name:'
+          log pic
+          MainCtrl.hideLoader()
+          id = Meteor.user()._id
+          Meteor.users.update id, {$set: {'profile.customize.backgroundPic': pic}}, ->
+            log 'Users background pic id now: ' + pic
+            location.reload()
+      else
+        log 'updating users background image...'
+        Media.updatePic e, pic, file, currentPicName, (pic)->
+          log 'picture name:'
+          log pic
+          MainCtrl.hideLoader()
+          id = Meteor.user()._id
+          Meteor.users.update id, {$set: {'profile.customize.backgroundPic': pic}}, ->
+#            colorThief = new ColorThief()
+#            mainColor = colorThief.getColor('http://http://d1jfn2lab933y3.cloudfront.net/user_media/' + pic)
+#            log mainColor
+            log 'yo'
+            log 'Users background pic id now: ' + pic
+#            location.reload()
+    fr.readAsBinaryString file
+
+
+}
 
 Template.profileMainInfo.events {
 
@@ -52,6 +110,17 @@ Template.profileMainInfo.events {
 
 }
 
+Template.profile.helpers {
+
+  backgroundImage: ->
+    userName = Session.get 'currentUsersPage'
+    pic = Meteor.users.findOne({'profile.username': userName}).profile.customize.backgroundPic
+    if pic.match /sample/
+      'images/' + pic
+    else
+      'user_media/' + pic
+}
+
 Template.profile.rendered = ->
 
   log 'Profile template rendered!'
@@ -64,8 +133,8 @@ Template.profile.rendered = ->
       prevTop = top
       $('.profile .top').css('background-position', '0 ' + (index * top) + 'px')
   , 16
-  id = $('#userId').val()
-  profileCtrl.buildPersonalityClouds(Meteor.users.findOne(id))
+  userName = Session.get 'currentUsersPage'
+  profileCtrl.buildPersonalityClouds(Meteor.users.findOne({'profile.username': userName}))
   date = {}
   date['year'] = 1989
   date['month'] = 1
@@ -85,14 +154,14 @@ Template.profile.rendered = ->
 
 Template.johariOutput.rendered = ->
 
-  id = $('#userId').val()
-  data = Meteor.users.findOne(id).profile.tests.johari
+  userName = Session.get 'currentUsersPage'
+  data = Meteor.users.findOne({'profile.username': userName}).profile.tests.johari
   profileCtrl.buildJohari(data)
 
 Template.bigFiveOutput.rendered = ->
 
-  id = $('#userId').val()
-  data = Meteor.users.findOne(id).profile.tests.bigFive.results
+  userName = Session.get 'currentUsersPage'
+  data = Meteor.users.findOne({'profile.username': userName}).profile.tests.bigFive.results
   profileCtrl.buildBigFive(data)
 
 

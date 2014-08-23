@@ -5,8 +5,9 @@
       "bootstrap3-less": {},
       "npm": {},
       "i18n": {},
-      "stellar": {},
-      "iron-router": {},
+      "iron-router": {
+        "version": "0.8.2"
+      },
       "roles": {},
       "event-hooks": {},
       "moment": {},
@@ -17,7 +18,8 @@
       "jquery-imagesloaded": {},
       "jqueryui": {},
       "iron-router-progress": {},
-      "jquery-scrollTo": {}
+      "jquery-scrollTo": {},
+      "aws-sdk": {}
     },
     "packages": {
       "bootstrap3-less": {
@@ -34,11 +36,6 @@
         "git": "https://github.com/jerico-dev/meteor-i18n.git",
         "tag": "v0.1.2",
         "commit": "e24f4ad9242741984dfa3985be4ed2c3bc34f9d5"
-      },
-      "stellar": {
-        "git": "https://github.com/noorderstorm/meteor-stellar.git",
-        "tag": "v0.1.0",
-        "commit": "1ca2f68e0cca5967a6f88545cea12055c9fc2465"
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
@@ -100,6 +97,11 @@
         "tag": "v1.4.6",
         "commit": "ab6f05c43e2a54fc7711e5a2ff8daa45e5ff4322"
       },
+      "aws-sdk": {
+        "git": "https://github.com/peerlibrary/meteor-aws-sdk.git",
+        "tag": "v2.0.14-1",
+        "commit": "8f4a0ee6f8a395fb2b4a48d358520bd50b96dafa"
+      },
       "iron-layout": {
         "git": "https://github.com/EventedMind/iron-layout.git",
         "tag": "v0.2.0",
@@ -114,6 +116,11 @@
         "git": "https://github.com/mizzao/meteor-build-fetcher.git",
         "tag": "v0.2.0",
         "commit": "5202ca83277860d798c6ff2ef1d8fe1bce007d0f"
+      },
+      "blocking": {
+        "git": "https://github.com/peerlibrary/meteor-blocking.git",
+        "tag": "v0.4.1",
+        "commit": "512354e9721d931c7884b56fbb3b419d060ae8da"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

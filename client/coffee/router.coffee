@@ -94,6 +94,7 @@ Router.map ->
           userId: id
         }
     onBeforeAction: ->
+      Session.set 'currentUsersPage', @params.username
       if !Meteor.user()
         Router.go 'base'
       else
@@ -127,3 +128,11 @@ Router.map ->
   }
 
   @route 'johariYours'
+
+  @route 'settings', {
+
+    action: ->
+
+      MainCtrl.modal.open()
+
+  }

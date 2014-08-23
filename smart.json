@@ -3,7 +3,9 @@
     "bootstrap3-less": {},
     "npm": {},
     "i18n": {},
-    "iron-router": {},
+    "iron-router": {
+      "version": "0.8.2"
+    },
     "roles": {},
     "event-hooks": {},
     "moment": {},
@@ -14,6 +16,7 @@
     "jquery-imagesloaded": {},
     "jqueryui": {},
     "iron-router-progress": {},
-    "jquery-scrollTo": {}
+    "jquery-scrollTo": {},
+    "aws-sdk": {}
   }
 }

@@ -1,0 +1,129 @@
+@modal-overlay-color: rgba(0, 200, 255, .5);
+
+
+.modal-page{
+  position: fixed;
+  width: 700px;
+  height: 500px;
+  border-top: 12px solid rgba(255, 255, 255, .5);
+  border-bottom: 12px solid rgba(255, 255, 255, .5);
+  border-left: 15px solid rgba(255, 255, 255, .5);
+  border-right: 15px solid rgba(255, 255, 255, .5);
+  top: 50%;
+  left: 50%;
+  z-index: @zindex-modal;
+  margin-top: -250px;
+  margin-left: -350px;
+  .transition(.6s);
+  visibility: hidden;
+  opacity: 0;
+  &._opened{
+    visibility: visible;
+    opacity: 1;
+    .modal-insert{
+      display: block;
+    }
+  }
+  .rounded(5px);
+  .modal-insert{
+    background: white;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    display: none;
+    .heading{
+      height: 10%;
+      border-bottom: 1px solid @gray-lighter;
+      line-height: 49px;
+      font-size: 23px;
+      text-align: center;
+      color: @gray;
+      i{
+        color: @blue;
+      }
+    }
+    .body{
+      position: relative;
+      height: 90%;
+      width: 100%;
+      >aside{
+        position: absolute;
+        width: 30%;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background: @gray-lighter;
+        >ul{
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          li{
+            font-size: 16px;
+            font-weight: 200;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            cursor: pointer;
+            .transition(.4s);
+            color: @gray;
+            &:hover{
+              background: @blue;
+              color: white;
+            }
+            &._active{
+              background: white;
+              color: @gray;
+            }
+          }
+        }
+      }
+      >.modal-tabs{
+        position: absolute;
+        width: 70%;
+        height: 100%;
+        top: 0;
+        left: 30%;
+        >.modal-tab{
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          opacity: 0;
+          visibility: hidden;
+          .transition(.4s);
+          &._visible{
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+    }
+  }
+  .close-it{
+    position: absolute;
+    right: -60px;
+    color: white;
+    top: -30px;
+    font-size: 50px;
+    cursor: pointer;
+  }
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: @zindex-modal-background;
+  background-color: @modal-overlay-color;
+  opacity: 0;
+  .transition(.4s);
+  visibility: hidden;
+  &._visible{
+    opacity: 1;
+    visibility: visible;
+  }
+}

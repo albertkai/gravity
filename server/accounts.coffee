@@ -8,6 +8,7 @@ Accounts.onCreateUser (options, user)->
     user.profile[name] = user.services.facebook[name]
   user.profile['registration'] = {}
   user.profile['tests'] = {}
+  user.profile['customize'] = {}
   user.profile.registration['status'] = 'justRegistered'
   user.profile.registration['step'] = ''
   user.profile.registration['breakOne'] = true

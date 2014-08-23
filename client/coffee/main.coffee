@@ -18,7 +18,7 @@ Deps.autorun ->
   if Meteor.user() and !Session.get('usersLoaded')
     log 'deps worked!'
     Session.set('usersLoaded', true)
-    Router.go 'base'
+    Router.go '/'
 
 
 Accounts.ui.config {
@@ -87,8 +87,16 @@ Template.mainLayout.events {
     $('.main-wrap').removeClass '_notifications-opened'
     utils.enableScroll()
 
+  'click #open-settings': (e)->
+
+    e.preventDefault()
+    MainCtrl.modal.open()
+
 
 }
+
+
+
 
 
 UI.body.cloudfrontUrl = 'http://d1jfn2lab933y3.cloudfront.net/'

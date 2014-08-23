@@ -128,6 +128,7 @@
           -webkit-perspective: 1000;
           -webkit-transform-style: preserve-3d;
           button{
+            position: relative;
             width: 60px;
             height: 60px;
             .rounded(60px);
@@ -143,6 +144,21 @@
             -o-transform: rotateY(0deg);
             transform: rotateY(0deg);
             -webkit-transform-style: preserve-3d;
+            z-index: 1;
+          }
+          span{
+            position: absolute;
+            height: 21px;
+            border-radius: 10px;
+            background: rgba(255, 50, 50, 0.7);
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            border: 1px solid white;
+            top: 0;
+            right: -4px;
+            z-index: 2;
+            padding: 0 6px;
           }
           &:hover{
             button{
@@ -225,19 +241,19 @@
             width: 15px;
             height: 15px;
             margin-bottom: 8px;
-            border: 1px solid @blue;
+            border: 1px solid white;
             cursor: pointer;
             .rounded(10px);
             &._active{
-              background: @blue;
+              background: white;
             }
             .tltp{
               position: absolute;
               height: 100%;
               width: 70px;
               left: -90px;
-              background: @blue;
-              color: white;
+              background: white;
+              color: @blue;
               .rounded(10px);
               font-size: 12px;
               text-align: center;
@@ -375,7 +391,7 @@
                 }
                 #open-tests-menu{
                   color: white;
-                  padding: 10px 15px;
+                  padding: 8px 15px;
                   background: transparent;
                   .rounded(30px);
                   float: right;
@@ -524,6 +540,26 @@
         }
       }
 
+    }
+  }
+}
+.colors-cont{
+  position: absolute;
+  height: 70px;
+  width: 300px;
+  left: 500px;
+  >div{
+    top: 0;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    .rounded(40px);
+    border: 2px solid white;
+    background: orange;
+    display: inline-block;
+    &#dominant{
+      width: 60px;
+      height: 60px;
     }
   }
 }

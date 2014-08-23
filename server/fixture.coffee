@@ -3,7 +3,7 @@
 #    id = user._id
 #    Meteor.users.remove id
 
-#Meteor.users.update "esLjvkvo7uCgGzATQ", {$set: {'profile.registration.status': 'johari'}}
+#Meteor.users.update "rf4pFXbkTJT5YKaGu", {$set: {'profile.customize.backgroundPic': 'images/sample_shanghai.jpg'}}
 ##Meteor.users.update "esLjvkvo7uCgGzATQ", {$set: {'profile.registration.step': 60}}
 #
 #user = Accounts.createUser {

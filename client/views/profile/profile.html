@@ -4,8 +4,8 @@
 
         <input id="userId" type="hidden" value="{{userId}}"/>
 
-        <div class="top">
-            {{>profileTop profile}}
+        <div class="top" style="background-image: url(http://d1jfn2lab933y3.cloudfront.net/{{backgroundImage}})">
+            {{>profileTop}}
         </div>
 
         <div class="main-info">
@@ -30,9 +30,17 @@
     <button id="show-notifications" class="notifications-toggle">
         <i class="fa fa-bell"></i>
     </button>
+    <input id="changeBackground" type="file"/>
     <h1 class="heading">
         <div class="container">
-            <p>{{firstName}} {{secondName}}</p>
+            <p>{{profile.firstName}} {{profile.secondName}}</p>
+
+            <div class="colors-cont">
+                <div id="dominant"></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
 
             <div class="info-short">
                 <p>77%</p>
@@ -41,7 +49,7 @@
     </h1>
     <div class="container">
         <div class="avatar">
-            <img src="{{avatar}}" alt="avatar"/>
+            <img src="{{profile.avatar}}" alt="avatar"/>
             <button class="view-pics"><i class="fa fa-camera"></i></button>
         </div>
         <ul class="controls">
@@ -50,12 +58,14 @@
             </li>
             <li>
                 <button><i class="fa fa-envelope"></i></button>
+                <span>25</span>
             </li>
             <li>
                 <button><i class="fa fa-users"></i></button>
             </li>
             <li>
                 <button><i class="fa fa-heart"></i></button>
+                <span>3</span>
             </li>
         </ul>
         <div class="tag-cloud-cont">
@@ -141,51 +151,42 @@
 
             <div id="personal-info" class="info-cont">
                 <div class="container">
+
                     <div class="row">
                         <aside>
                             <nav class="context-nav">
                                 <ul>
-                                    <li class="_active">Основное
-                                        <div></div>
-                                    </li>
-                                    <li>Психология
-                                        <div></div>
-                                    </li>
-                                    <li>Астрология
-                                        <div></div>
-                                    </li>
-                                    <li>Джохари
+                                    <li class="_active">Мировоззрение
                                         <div></div>
                                     </li>
                                 </ul>
                             </nav>
                         </aside>
                         <div>
-                            <div id="cosmogramm" class="units">
+                            <article>
+                                <h2>Мировоззрение</h2>
+                                <h5>Какие 5 качеств в людях?</h5>
+                                <p>Преданность, открытость, прямолинейность, ум, настойчивость, доброту</p>
+                                <h5>Если бы вам сказали до конца жизни смотреть всего 3 фильма, что бы это было?</h5>
+                            </article>
+                        </div>
+                    </div>
 
-                                <h2>Астрология</h2>
-
-                            </div>
-
-                            <div id="psychology" class="units">
-
-                                <h2>Психология</h2>
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab architecto aut blanditiis culpa dolores et ex facilis fugiat harum, id libero, modi nisi optio perferendis quam quasi quis quisquam repellat reprehenderit sit vitae, voluptas!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab architecto aut blanditiis culpa dolores et ex facilis fugiat harum quasi quis quisquam repellat reprehenderit sit vitae, voluptas!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab architecto aut blanditiis culpa dolores et ex facilis fugiat harum quasi quis quisquam repellat reprehenderit, voluptas!</p>
-
-                            </div>
-
-                            <div id="johari" class="units">
-
-                                <h2>Джохари</h2>
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab architecto aut blanditiis culpa dolores et ex facilis fugiat harum, id libero, modi nisi optio perferendis quam quasi quis quisquam repellat reprehenderit sit vitae, voluptas!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab architecto aut blanditiis culpa dolores et ex facilis fugiat harum quasi quis quisquam repellat reprehenderit sit vitae, voluptas!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab architecto aut blanditiis culpa dolores et ex facilis fugiat harum quasi quis quisquam repellat reprehenderit, voluptas!</p>
-
-                            </div>
+                    <div class="row">
+                        <aside>
+                            <nav class="context-nav">
+                                <ul>
+                                    <li class="_active">Предпочтения
+                                        <div></div>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </aside>
+                        <div>
+                            <article>
+                                <h2>Предпочтения</h2>
+                                <p>Люблю кушать, всякие няшности!</p>
+                            </article>
                         </div>
                     </div>
                 </div>

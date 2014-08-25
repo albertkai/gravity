@@ -17,6 +17,7 @@
   .transition(.6s);
   visibility: hidden;
   opacity: 0;
+  .rounded(5px);
   &._opened{
     visibility: visible;
     opacity: 1;
@@ -24,7 +25,258 @@
       display: block;
     }
   }
-  .rounded(5px);
+  &.messages{
+    width: 830px;
+    height: 600px;
+    margin-left: -415px;
+    margin-top: -300px;
+    .modal-insert{
+      .body{
+        >aside{
+          width: 300px;
+          left: 0;
+          .search{
+            height: 10%;
+            width: 100%;
+            background: @gray-lighter;
+            border-bottom: 1px solid @gray-lighter;
+            input{
+              font-size: 16px;
+              border-bottom: 1px solid @gray-lighter;
+              margin: 8px;
+              width: 80%;
+            }
+            button{
+              display: inline-block;
+              position: absolute;
+              width: 36px;
+              height: 36px;
+              padding: 0;
+              top: 8px;
+              right: 8px;
+              background: white;
+              color: @blue;
+              font-size: 18px;
+              &:hover{
+                background: @blue;
+                border: 1px solid @blue;
+                color: white;
+              }
+            }
+          }
+          >ul{
+            height: 80%;
+            width: 100%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            border-bottom: 1px solid white;
+            >li{
+              position: relative;
+              height: 80px;
+              font-size: 14px;
+              &._active{
+                background: white;
+              }
+              >div{
+                position: absolute;
+                &:nth-child(1){
+                  width: 25%;
+                  left: 0;
+                  top: 0;
+                  >img{
+                    height: 60px;
+                    width: 60px;
+                    .rounded(60px);
+                    border: 2px solid white;
+                    margin: 10px 8px;
+                  }
+                }
+                &:nth-child(2){
+                  width: 75%;
+                  left: 25%;
+                  top: 0;
+                  >*{
+                    margin: 0;
+                  }
+                  >p, h5{
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    padding-right: 5px;
+                  }
+                  h5{
+                    margin-top: 12px;
+                  }
+                  p{
+                    &:nth-child(2){
+                      margin-top: 3px;
+                    }
+                    &:nth-child(3){
+                      color: @gray-light;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .filters{
+            position: relative;
+            height: 10%;
+            width: 100%;
+            .button-group{
+              width: 90%;
+              margin-left: 5%;
+              position: relative;
+              margin-top: 11px;
+              button{
+                position: absolute;
+                top: 0;
+                width: 33%;
+                background: @gray-light;
+                color:white;
+                border: 0;
+                font-size: 8px;
+                -webkit-border-radius: 0;
+                -moz-border-radius: 0;
+                border-radius: 0;
+                font-weight: 400;
+                .transition(.4s);
+                &._active, &:hover{
+                  background: white;
+                  color: @gray;
+                }
+                &:nth-child(1){
+                  left: 0;
+                  border-right: 1px solid @gray-lighter;
+                  -webkit-border-top-left-radius: 30px;
+                  -webkit-border-bottom-left-radius: 30px;
+                  -moz-border-radius-topleft: 30px;
+                  -moz-border-radius-bottomleft: 30px;
+                  border-top-left-radius: 30px;
+                  border-bottom-left-radius: 30px;
+                }
+                &:nth-child(2){
+                  left: 33%;
+                  border-right: 1px solid @gray-lighter;
+                }
+                &:nth-child(3){
+                  left: 66%;
+                  -webkit-border-top-right-radius: 30px;
+                  -webkit-border-bottom-right-radius: 30px;
+                  -moz-border-radius-topright: 30px;
+                  -moz-border-radius-bottomright: 30px;
+                  border-top-right-radius: 30px;
+                  border-bottom-right-radius: 30px;
+                }
+              }
+            }
+          }
+        }
+        >div{
+          position: absolute;
+          top: 0;
+          left: 300px;
+          width: 500px;
+          height: 100%;
+          overflow: hidden;
+          #messages-top{
+            position: relative;
+            height: 10%;
+            border-bottom: 1px solid @gray-lighter;
+            a{
+              font-size: 18px;
+              line-height: 50px;
+              padding-left: 10px;
+              i{
+                font-size: 6px;
+              }
+              sup{
+                color: @blue;
+              }
+            }
+            button{
+              position: absolute;
+              font-size: 16px;
+              padding: 0;
+              display: block;
+              height: 31px;
+              padding: 0 14px;
+              line-height: 30px;
+              top: 10px;
+              right: 10px;
+              span{
+                position: relative;
+                font-size: 10px;
+                top: -2px;
+              }
+            }
+          }
+          #messages-cont{
+            height: 80%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            .message{
+              position: relative;
+              margin: 40px 0;
+              margin-left: 25px;
+              &.yours{
+                margin-left: 75px;
+                .body{
+                  border: 1px solid @green;
+                }
+                .avatar{
+                  img{
+                    border: 1px solid @green;
+                  }
+                  left: auto;
+                  right: 14px;
+                }
+                .message-date{
+                  left: auto;
+                  right: 58px;
+                }
+              }
+              .avatar{
+                width: 40px;
+                height: 40px;
+                position: absolute;
+                top: -25px;
+                left: -14px;
+                z-index: 2;
+                img{
+                  width: 100%;
+                  height: 100%;
+                  .rounded(30px);
+                  border: 1px solid @blue;
+                }
+              }
+              .message-date{
+                position: absolute;
+                top: -21px;
+                left: 30px;
+                color: @gray-light;
+              }
+              .body{
+                display: inline-block;
+                max-width: 380px;
+                padding: 20px;
+                position: relative;
+                z-index: 1;
+                border: 1px solid @blue;
+                .rounded(5px);
+                margin: 0 10px;
+                line-height: 18px;
+                color: @gray;
+              }
+            }
+          }
+          #new-message{
+            height: 10%;
+          }
+        }
+      }
+    }
+  }
   .modal-insert{
     background: white;
     width: 100%;
@@ -35,7 +287,7 @@
     .heading{
       height: 10%;
       border-bottom: 1px solid @gray-lighter;
-      line-height: 49px;
+      line-height: 55px;
       font-size: 23px;
       text-align: center;
       color: @gray;
@@ -62,7 +314,7 @@
             font-size: 16px;
             font-weight: 200;
             padding: 15px 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            border-bottom: 1px solid rgba(255, 255, 255, 1);
             cursor: pointer;
             .transition(.4s);
             color: @gray;

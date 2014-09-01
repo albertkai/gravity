@@ -16,7 +16,8 @@
     "jquery-imagesloaded": {},
     "jqueryui": {},
     "iron-router-progress": {},
-    "jquery-scrollTo": {},
-    "aws-sdk": {}
+    "aws-sdk": {},
+    "buzz.js": {},
+    "collection2": {}
   }
 }

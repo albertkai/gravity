@@ -18,8 +18,9 @@
       "jquery-imagesloaded": {},
       "jqueryui": {},
       "iron-router-progress": {},
-      "jquery-scrollTo": {},
-      "aws-sdk": {}
+      "aws-sdk": {},
+      "buzz.js": {},
+      "collection2": {}
     },
     "packages": {
       "bootstrap3-less": {
@@ -92,15 +93,20 @@
         "tag": "v0.4.1",
         "commit": "496fcda9a6ec352b4733725f60c6f280250c3541"
       },
-      "jquery-scrollTo": {
-        "git": "https://github.com/nate-strauser/meteor-jquery.scrollTo.git",
-        "tag": "v1.4.6",
-        "commit": "ab6f05c43e2a54fc7711e5a2ff8daa45e5ff4322"
-      },
       "aws-sdk": {
         "git": "https://github.com/peerlibrary/meteor-aws-sdk.git",
         "tag": "v2.0.14-1",
         "commit": "8f4a0ee6f8a395fb2b4a48d358520bd50b96dafa"
+      },
+      "buzz.js": {
+        "git": "https://github.com/brentjanderson/meteor-buzz.git",
+        "tag": "v1.1.4",
+        "commit": "6ddceb8ecb4938695a2491eff0616246344c8660"
+      },
+      "collection2": {
+        "git": "https://github.com/aldeed/meteor-collection2.git",
+        "tag": "v0.4.6",
+        "commit": "80554182486be0d8e74f7ed02194a5649d712e27"
       },
       "iron-layout": {
         "git": "https://github.com/EventedMind/iron-layout.git",
@@ -121,6 +127,11 @@
         "git": "https://github.com/peerlibrary/meteor-blocking.git",
         "tag": "v0.4.1",
         "commit": "512354e9721d931c7884b56fbb3b419d060ae8da"
+      },
+      "simple-schema": {
+        "git": "https://github.com/aldeed/meteor-simple-schema.git",
+        "tag": "v0.7.0",
+        "commit": "77d267aec4ba8a70f677e5d9ef9fb91fb0e3f0f6"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

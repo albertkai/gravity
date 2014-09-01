@@ -9,6 +9,11 @@ Accounts.onCreateUser (options, user)->
   user.profile['registration'] = {}
   user.profile['tests'] = {}
   user.profile['customize'] = {}
+  user.profile['com'] = {}
+  user.profile.com['messages'] = []
+  user.profile.com['friends'] = []
+  user.profile.com['likes'] = []
+  user.profile.com['bookmarks'] = []
   user.profile.registration['status'] = 'justRegistered'
   user.profile.registration['step'] = ''
   user.profile.registration['breakOne'] = true
